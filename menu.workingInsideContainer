@@ -1,0 +1,12 @@
+<div id="menu">
+<link rel="stylesheet" type="text/css" href="StyleSheets/menu.css.workingInsideContainer"/>
+<ul id="navigation">
+<li><a href='home.php'>Home Page</a></li>
+<li><a href='viewLot.php'>View Lot Status</a></li>
+<li><a href='viewParking.php'>View Parking Map</a></li>
+<li><a href='updateUser.php'>Update User Info</a></li>
+<li><a href='about.php'>About</a></li>
+<li><a href='logout.php'>Logout</a></li>
+</ul>
+</br>
+</div>
