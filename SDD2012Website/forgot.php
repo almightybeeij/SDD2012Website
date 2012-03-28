@@ -1,5 +1,4 @@
 <html>
-<body>
-Sucks to be you!
+<body>Sucks to be you!
 </body>
 </html>
