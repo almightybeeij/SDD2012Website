@@ -1,0 +1,8 @@
+<link rel="stylesheet" type="text/css" href="menu.css" />
+<ul id="navigation">
+<li><div style="color:white">Menu --></div></li>
+<li><div id="a" onclick="window.location='a.html'">Page a</div></li>
+<li><div id="b" onclick="window.location='b.html'">Page b</div></li>
+<li><div id="c" onclick="window.location='c.html'">Page c</div></li>
+</ul>
+</br>
