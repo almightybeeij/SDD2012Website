@@ -1,0 +1,68 @@
+#header 
+{
+	background-position:left;
+	background-color:white;
+	text-align:center;
+	color:#003366;
+	font-size:xx-large;
+	font-family:"VERDANA";
+}
+
+#formBlock
+{
+	width:425px;
+	height:200px;
+	margin: 10px auto;
+	background-color:#003366;
+	color:#FFCC00;
+}
+#outerBlock
+{
+	width:100%;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+#container
+{
+	width:940px;
+	margin: 0px auto;
+}
+
+#formText
+{
+	display: inline-block;
+	width:250px;
+	height:200px;
+	margin: 0px auto;
+}
+#usernameLabel, #passwordLabel, #usernameText, #passwordText
+{
+	display: inline-block;
+	width:75px;
+	margin: 5px;
+}
+#usernameText, #passwordText
+{
+	display: inline-block;
+	width:150px;
+	margin: 5px;
+}
+#submit
+{
+	float:right;
+	width:75px;
+	margin: 5px;
+}
+a:link, a:visited
+{
+	float:left;
+	margin: 5px 5px 0px 10px;
+	color:#FFCC00;
+	font: 14px Verdana;
+	
+}
+p 
+{
+	display:inline;
+}
