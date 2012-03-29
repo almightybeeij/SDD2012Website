@@ -54,18 +54,18 @@
 						style="text-decoration: underline; font: 15px Verdana; font-weight: 900">RSS
 						FEED</span>
 				</center>
-				</br>
+				<br>
 			</div>
 
 			<!-- Main Content Area-->
 			<div id="content">
-				Hello and welcome to the SDD Spring Semester Class Page</br> A Line</br>
-				B Line</br> C Line</br> D Line</br> E Line</br> F Line</br> G Line</br>
-				H Line</br> I Line</br> J Line </br> K Line</br> L Line</br> M Line</br>
-				N Line</br> O Line</br> P Line</br> Q Line</br> R Line</br> S Line</br>
-				T Line</br> U Line</br> V Line</br> W Line</br> X Line</br> Y Line</br>
-				Z Line</br> 0 Line</br> 1 Line</br> 2 Line</br> 3 Line</br> 4 Line</br>
-				5 Line</br> 6 Line</br>
+				Hello and welcome to the SDD Spring Semester Class Page<br> A Line<br>
+				B Line<br> C Line<br> D Line<br> E Line<br> F Line<br> G Line<br>
+				H Line<br> I Line<br> J Line <br> K Line<br> L Line<br> M Line<br>
+				N Line<br> O Line<br> P Line<br> Q Line<br> R Line<br> S Line<br>
+				T Line<br> U Line<br> V Line<br> W Line<br> X Line<br> Y Line<br>
+				Z Line<br> 0 Line<br> 1 Line<br> 2 Line<br> 3 Line<br> 4 Line<br>
+				5 Line<br> 6 Line<br>
 			</div>
 
 			<!-- Right Side Pane-->
