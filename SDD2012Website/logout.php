@@ -13,12 +13,13 @@
 		include 'connectServer.php';
 		?>
 
-	<div style="background-color: #FFFFFF;">
+	<!--Top Banner-->
+	<center>
 		<img src="Images/UCOBanner.gif"></img>
-	</div>
-	<div style="background-color: #FFCC00">
-		<?php include "menu"?>
-	</div>
+	</center>
+	<?php
+	include "menu"
+	?>
 	<?php
 
 	if (isset($_POST['logout']))
@@ -33,10 +34,39 @@
 
 	?>
 
-	Are you sure you want to log out?
-	<form name='logout' action='<?=$PHP_SELF?>' method='post'>
-		<input type='submit' name='logout' value='Logout' />
-	</form>
+	<div id="outerBlock">
+		<div id="containerBlarg">
+			<!-- Left side Pane-->
+			<div id="leftPane">
+				<center>
+					<span
+						style="text-decoration: underline; font: 15px Verdana; font-weight: 900">RSS
+						FEED</span>
+				</center>
+				<br>
+			</div>
+
+			<!-- Main Content Area-->
+			<div id="content">
+				Are you sure you want to log out?
+				<form name='logout' action='<?=$PHP_SELF?>' method='post'>
+					<input type='submit' name='logout' value='Logout' />
+				</form>
+			</div>
+
+			<!-- Right Side Pane-->
+			<div id="rightPane">This is the right pane</div>
+		</div>
+		<!-- Footer-->
+		<div id="footer">
+			<?php 
+			$time = time();
+			$year=date("Y",$time);
+			echo" Copyright &copy $year - Tyler's SDD Group - All Rights Reserved";
+			?>
+		</div>
+	</div>
+
 	<?php
 	}
 	else

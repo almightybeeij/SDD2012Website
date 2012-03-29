@@ -1,7 +1,7 @@
 <?php session_start() ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="StyleSheets/viewLot.css" />
+<link rel="stylesheet" type="text/css" href="StyleSheets/style.css" />
 <title>View Lot Status Page</title>
 </head>
 <body>
