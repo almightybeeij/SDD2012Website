@@ -31,7 +31,7 @@
 
 			<!-- Main Content Area-->
 			<div id="content">
-				View Lot Page
+				View Lot Status
 			</div>
 
 			<!-- Right Side Pane-->

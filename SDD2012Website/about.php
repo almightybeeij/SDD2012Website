@@ -9,43 +9,44 @@
 	if (isset($_SESSION['sessionCookie']))
 	{
 		?>
+
 	<!--Top Banner-->
 	<center>
 		<img src="Images/UCOBanner.gif"></img>
 	</center>
-
-	<!-- Main Content Area-->
-	<div id="aboutContent">
-
-		<?php
-		include "menu.workingInsideContainer"
-		?>
-		<!-- Left side Pane-->
-		<div id="aboutLeftPane">
-			<center>
-				<span
-					style="text-decoration: underline; font: 15px Verdana; font-weight: 900">RSS
-					FEED</span>
-			</center>
-			</br>
-		</div>
-
-		<!-- Middle Pane -->
-		<div id="aboutMiddlePane">
-			Whats it all about eh?</br> Filler text</br> Filler text</br> Filler
-			text</br> Filler text</br> Filler text</br> Filler text</br> Filler
-			text</br> Filler text</br> Filler text</br> Filler text</br> Filler
-			text</br>
-		</div>
-
-		<!-- Right Side Pane-->
-		<div id="aboutRightPane">This is the right pane</div>
-		<!-- Footer-->
-		<div id="aboutFooter"></div>
-
-	</div>
-
 	<?php
+	include "menu"
+	?>
+	<div id="outerBlock">
+		<div id="containerBlarg">
+			<!-- Left side Pane-->
+			<div id="leftPane">
+				<center>
+					<span
+						style="text-decoration: underline; font: 15px Verdana; font-weight: 900">RSS
+						FEED</span>
+				</center>
+				<br>
+			</div>
+
+			<!-- Main Content Area-->
+			<div id="content">
+				About Page
+			</div>
+
+			<!-- Right Side Pane-->
+			<div id="rightPane">This is the right pane</div>
+		</div>
+		<!-- Footer-->
+		<div id="footer">
+			<?php 
+			$time = time();
+			$year=date("Y",$time);
+			echo" Copyright &copy $year - Tyler's SDD Group - All Rights Reserved";
+			?>
+		</div>
+	</div>
+	<?php 
 	}
 	else
 	{
