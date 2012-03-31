@@ -1,23 +1,25 @@
 <?php
 session_start();
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
 ?>
 <html>
 <body>
 
 	<?php
 
-	include 'configServer.php';
-	include 'connectServer.php';
+	include 'Config/configServer.php';
+	include 'Config/connectServer.php';
 
 	//Delete from clientSession if there is a previous session cookie
 	$sha256Pass = hash ('sha256', $_POST['password']);
-	$sqlDelete = "delete from clientSession where username='$_POST[username]' and password = '$sha256Pass';";
+	$sqlDelete = "delete from clientsession where email='$_POST[email]';";
 	$resultDelete = mysql_query($sqlDelete);
 
 
 
 	$sha256Pass = hash ( 'sha256' , $_POST['password'] );
-	$sql = "select * from users where username='".$_POST['username']."' and password='".$sha256Pass."';";
+	$sql = "select * from client where email='".$_POST['email']."' and password='".$sha256Pass."';";
 
 	$result = mysql_query($sql);
 	if (!$result)
@@ -26,17 +28,18 @@ session_start();
 	$num_results = mysql_num_rows($result);
 	if ($num_results <= 0)
 	{
-		include 'closedbServer.php';
+		include 'Config/closedbServer.php';
 		#header("Location: invalid.php");
-		$_SESSION['invalid'] = 'invalidUserNameAndPassword';
+		$_SESSION['invalid'] = 'invalidEmailAndPassword';
 		header("Location: index.php");
 	}
 	else
 	{
 		$sessionCookie = hash ('sha256', time());
-		$sqlSession = "insert into clientSession values ('$_POST[username]','$sha256Pass','$sessionCookie');";
+		$time = time();
+		$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$time');";
 
-		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['password'] = $sha256Pass;
 		$_SESSION['sessionCookie'] = $sessionCookie;
 
@@ -44,7 +47,7 @@ session_start();
 		if (!$resultSession)
 			die('Invalid query: ' . mysql_error());
 
-		include 'closedbServer.php';
+		include 'Config/closedbServer.php';
 		header("Location: home.php");
 	}
 

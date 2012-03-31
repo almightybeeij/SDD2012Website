@@ -9,8 +9,8 @@
 	if (isset($_SESSION['sessionCookie']))
 	{
 
-		include 'configServer.php';
-		include 'connectServer.php';
+		include 'Config/configServer.php';
+		include 'Config/connectServer.php';
 		?>
 
 	<!--Top Banner-->
@@ -24,10 +24,10 @@
 
 	if (isset($_POST['logout']))
 	{
-		$sqlDelete = "delete from clientSession where username='$_SESSION[username]' and password = '$_SESSION[password]';";
+		$sqlDelete = "delete from clientsession where Client_email='$_SESSION[email]' and sessionid = '$_SESSION[sessionCookie]';";
 		$resultDelete = mysql_query($sqlDelete);
 		$num_results = mysql_num_rows($resultDelete);
-		include 'closedbServer.php';
+		include 'Config/closedbServer.php';
 		session_destroy();
 		header("Location: index.php");
 	}

@@ -36,13 +36,13 @@
 	height:200px;
 	margin: 0px auto;
 }
-#usernameLabel, #passwordLabel, #usernameText, #passwordText
+#emailLabel, #passwordLabel, #emailText, #passwordText
 {
 	display: inline-block;
 	width:75px;
 	margin: 5px;
 }
-#usernameText, #passwordText
+#emailText, #passwordText
 {
 	display: inline-block;
 	width:150px;
@@ -53,6 +53,12 @@
 	float:right;
 	width:75px;
 	margin: 5px;
+}
+#signUp
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:30%;
 }
 a:link, a:visited
 {
