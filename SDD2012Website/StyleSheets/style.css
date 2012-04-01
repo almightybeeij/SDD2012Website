@@ -115,7 +115,7 @@
 
 #aboutRightPane
 {
-        background-image:url('../Images/FairOaksNight.jpg');
+    background-image:url('../Images/FairOaksNight.jpg');
 	float:right;
 	width:125px;
 	height:450px;
@@ -140,4 +140,29 @@
 	border-bottom-left-radius:15px;
 	border-top-right-radius:15px;
 	border-top-left-radius:15px;
+}
+
+table
+{	
+	margin:5px 0px;
+	padding:5px;
+	border: 1px solid black;
+}
+
+tr,td
+{
+	font:12px Verdana;
+	border: 1px solid black;
+	margin:5px;
+	padding:5px;
+}
+th
+{
+	background-color:#003366;
+	font:12px Verdana;
+	font-weight:bold;
+	color:white;
+	border: 1px solid black;
+	margin:5px;
+	padding:5px;
 }

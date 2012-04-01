@@ -13,7 +13,7 @@ ini_set('display_errors', 1);
 
 	//Delete from clientSession if there is a previous session cookie
 	$sha256Pass = hash ('sha256', $_POST['password']);
-	$sqlDelete = "delete from clientsession where email='$_POST[email]';";
+	$sqlDelete = "delete from clientsession where Client_email='$_POST[email]';";
 	$resultDelete = mysql_query($sqlDelete);
 
 
