@@ -82,9 +82,9 @@
 					if (!$result)
 						die('Invalid query: ' . mysql_error());
 
-					echo "<form name='update' action='$_SERVER[PHP_SELF]?>' method='post'>";
+					echo "<form name='update' action='$PHP_SELF?>' method='post'>";
 					echo"<table>";
-					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Type</th><th>Edit Info?</th></tr>";
+					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Type</th><th>Update?</th></tr>";
 					while ($row = mysql_fetch_array($result))
 					{
 						echo "<tr>";
@@ -130,7 +130,7 @@
 						else
 							echo "<td>You are a Student</td>";
 							
-						echo "<td><form name='edit' action='$_SERVER[PHP_SELF]?>' method='post'>";
+						echo "<td><form name='edit' action='$PHP_SELF?>' method='post'>";
 						echo "<input id='edit' type='submit' name='edit' value='Edit'/></td>";
 						echo "</tr>";
 					}

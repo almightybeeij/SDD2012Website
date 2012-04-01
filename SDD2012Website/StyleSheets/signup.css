@@ -1,0 +1,24 @@
+#outerContainer
+{
+	width: 100%;
+	display: block;
+	margin: auto auto;
+	text-align:center;
+	
+}
+#innerContainer
+{
+	display:inline-block;
+	margin: 20px auto;
+	width: 600px;
+	height: 240px
+}
+
+label
+{
+	display:inline-block;
+	text-align:left;
+	width:200px;
+	margin-left:auto;
+	margin-right:auto;
+}
