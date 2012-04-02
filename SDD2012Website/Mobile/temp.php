@@ -1,5 +1,12 @@
 <html>
 <?php
-echo "This is just a temp file until we add some Android specific applications code";
+
+session_start();
+include '../Config/connectServerI.php';
+
+echo $conn_mysqli->host_info . "\n";
+
+include '../Config/closedbServerI.php';
+
 ?>
 </html>
