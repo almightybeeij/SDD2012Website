@@ -17,8 +17,11 @@ $stmt->execute();
 $out_boundary = NULL;
 $stmt->bind_result($out_boundary);
 
-while ($row = $stmt->fetch()) {
-	$output[] = $row;
+$md = $stmt->result_metadata();
+$output = array();
+
+while ($field = $md->fetch_field()) {
+	$output[] = $field->name;
 }
 
 print(json_encode($output));
