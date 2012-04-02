@@ -36,7 +36,14 @@
 				Here is your user information<br><br>
 
 				<?php
+				//This sets up the variable to be used for displaying error messages
 				$passwordUpdateError = null;
+				
+				/*
+				 * This is the part the updates the password after a user clicks the Yes button after taking a seminar
+				 * After the Yes button is clicked and then the update button the user can update their password if nothing
+				 * is wrong with the input 
+				 */
 				if (isset ($_POST['passwordUpdate']))
 				{
 					if($_POST['password1TextBox'] == $_POST['password2TextBox'])
@@ -123,6 +130,10 @@
 						echo "</tr>";
 					}
 				}
+				
+				/*
+				 * This part prints out the table to update the users password
+				 */
 				else if (isset ($_POST['passwordButton']) || !empty($passwordUpdateError))
 				{
 				?>
