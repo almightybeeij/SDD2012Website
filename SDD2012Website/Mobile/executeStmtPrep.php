@@ -22,9 +22,7 @@ $stmt->bind_result($out_boundary);
 $md = $stmt->result_metadata();
 $output = array();
 
-while ($field = $md->fetch_field()) {
-	$output[0] = array(0=>$field->name, 1=>$field->value);
-}
+$output[] = $md->fetch_assoc();
 
 print(json_encode($output));
 
