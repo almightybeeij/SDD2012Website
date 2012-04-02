@@ -12,9 +12,7 @@ $bind_id = $_GET["lotid"];
 
 $stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = (?)");
 $stmt->bind_param("i", $bind_id);
-//$stmt->execute();
-
-$result = mysqli_query($conn_mysqli, $stmt);
+$stmt->execute();
 
 $out_boundary = NULL;
 $stmt->bind_result($out_boundary);
