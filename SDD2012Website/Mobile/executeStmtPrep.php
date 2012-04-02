@@ -17,8 +17,8 @@ $stmt->execute();
 $out_boundary = NULL;
 $stmt->bind_result($out_boundary);
 
-while ($stmt->fetch()) {
-	$output[] = $out_boundary;
+while ($row = $stmt->fetch()) {
+	$output[] = $row;
 }
 
 print(json_encode($output));
