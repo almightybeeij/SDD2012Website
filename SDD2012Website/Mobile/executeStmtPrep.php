@@ -18,8 +18,10 @@ $out_boundary = NULL;
 $stmt->bind_result($out_boundary);
 
 while ($stmt->fetch()) {
-	echo $out_boundary;
+	$output[] = $out_boundary;
 }
+
+print(json_encode($output));
 
 include '../Config/closedbServerI.php';
 
