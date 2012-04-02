@@ -35,9 +35,14 @@ ini_set('display_errors', 1);
 	}
 	else
 	{
-		$sessionCookie = hash ('sha256', time());
+		//Use timestamp to create a a hash for session cooki
 		$time = time();
-		$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$time');";
+		$sessionCookie = hash ('sha256', $time);
+		
+		//Format the timestamp to put into mysql datestamp
+		$format="Y-m-d H:i:s";
+		$formattedTime = date($format,$time);
+		$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$formattedTime');";
 
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['password'] = $sha256Pass;

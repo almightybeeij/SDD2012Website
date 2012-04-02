@@ -83,7 +83,7 @@ session_start();
 			// Set error to null first to flush variable 
 			$error=null;
 		?>
-		<b>Please Sign Up To Access the System!!</b> 
+		<center><b>Please Sign Up To Access the System!!</b></center> 
 			<form method='post' action='<?= $PHP_SELF?>'>
 				<label name="firstNameLabel" for="firstNameTextBox">First Name :</label>
 				<input type='text' name='firstNameTextBox' value='<?= $_POST['firstNameTextBox']?>'/> 
@@ -136,9 +136,11 @@ session_start();
 						$error = $error."Your Passwords Did Not Match<br>"; 
 				?>
 				<br>
-				<label name="userType">Please Select Your User Type :</label> 
-				<input type="radio" name="userTypeRadioButton" value="student"/>Student
-				<input type="radio" name="userTypeRadioButton" value="faculty"/>Faculty
+				<label name="userType">Please Select Your User Type :</label>
+				<div> 
+					<input type="radio" name="userTypeRadioButton" value="student"/>Student
+					<input type="radio" name="userTypeRadioButton" value="faculty"/>Faculty
+				</div>
 				<?php 
 					if (empty($_POST['userTypeRadioButton']) && isset($_POST['submit']))
 					{ 
@@ -148,7 +150,7 @@ session_start();
 				?>
 				<br>
 				<?php echo "<font color='red'>$error</font>"?> 
-				<input type='submit' name='submit' value='Sign Up' />
+				<input style="float:right" type='submit' name='submit' value='Sign Up' />
 			</form>
 		</div>
 	</div>

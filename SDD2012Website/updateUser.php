@@ -116,7 +116,7 @@
 					if (!$result)
 						die('Invalid query: ' . mysql_error());
 
-					echo"<table>";
+					echo"<table id='preEditTable'>";
 					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Type</th><th>Edit Info?</th></tr>";
 					while ($row = mysql_fetch_array($result))
 					{
@@ -130,7 +130,7 @@
 						else
 							echo "<td>You are a Student</td>";
 							
-						echo "<td><form name='edit' action='$PHP_SELF?>' method='post'>";
+						echo "<td><form id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
 						echo "<input id='edit' type='submit' name='edit' value='Edit'/></td>";
 						echo "</tr>";
 					}

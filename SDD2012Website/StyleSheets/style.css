@@ -147,14 +147,17 @@ table
 	margin:5px 0px;
 	padding:5px;
 	border: 1px solid black;
+	width:100%
 }
+
 
 tr,td
 {
 	font:12px Verdana;
 	border: 1px solid black;
-	margin:5px;
-	padding:5px;
+	margin:0px;
+	padding:0px;
+	text-align:center;
 }
 th
 {
@@ -165,4 +168,9 @@ th
 	border: 1px solid black;
 	margin:5px;
 	padding:5px;
+}
+
+#editForm
+{
+	margin:0px;
 }

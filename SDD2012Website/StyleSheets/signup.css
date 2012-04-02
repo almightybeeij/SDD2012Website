@@ -10,7 +10,7 @@
 {
 	display:inline-block;
 	margin: 20px auto;
-	width: 600px;
+	width: 358x;
 	height: 240px
 }
 
@@ -21,4 +21,11 @@ label
 	width:200px;
 	margin-left:auto;
 	margin-right:auto;
+}
+div
+{
+		display:inline-block;
+		text-align:left;
+		margin-left:auto;
+		margin-right:auto;
 }
