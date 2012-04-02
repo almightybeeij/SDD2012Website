@@ -170,7 +170,11 @@ th
 	padding:5px;
 }
 
-#editForm
+#editForm 
+{
+	margin:0px;
+}
+#passwordForm
 {
 	margin:0px;
 }
