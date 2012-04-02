@@ -22,7 +22,10 @@ $stmt->bind_result($out_boundary);
 //$output[] = $md->fetch_assoc();
 
 //print(json_encode($output));
-print($out_boundary);
+
+while ($stmt->fetch()) {
+	echo $out_boundary;
+}
 
 include '../Config/closedbServerI.php';
 
