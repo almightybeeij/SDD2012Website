@@ -24,7 +24,7 @@ $output = array();
 
 $output[] = $md->fetch_assoc();
 
-print(json_encode($output));
+print(json_encode($md));
 
 include '../Config/closedbServerI.php';
 
