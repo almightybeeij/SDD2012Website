@@ -4,7 +4,7 @@
 session_start();
 include '../Config/connectServerI.php';
 
-echo $conn_mysqli->host_info . "\n\n";
+echo $conn_mysqli->host_info . "<br/><br/>";
 
 $id = 18;
 $stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = (?)");
