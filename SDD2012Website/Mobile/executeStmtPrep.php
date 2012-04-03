@@ -18,7 +18,9 @@ $stmt->execute();
 
 $res = $stmt->get_result();
 
-var_dump($res->fetch_all());
+$row = $res->fetch_array(MYSQLI_NUM);
+
+print(json_encode($row));
 
 //$out_boundary = NULL;
 //$stmt->bind_result($out_boundary);
