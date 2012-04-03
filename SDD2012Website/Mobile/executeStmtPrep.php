@@ -10,10 +10,12 @@ include '../Config/connectServerI.php';
 //}
 
 $bind_id = $_REQUEST["lotid"];
+$bind_avail = $_REQUEST["available"];
 
-$stmt = $conn_mysqli->prepare("SELECT Boundary1, Boundary2 FROM parkinglot WHERE lotid = ?");
+$stmt = $conn_mysqli->prepare("SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?");
 
 $stmt->bind_param("i", $bind_id);
+$stmt->bint_param("i", $bind_avail);
 $stmt->execute();
 $stmt->store_result();
 
