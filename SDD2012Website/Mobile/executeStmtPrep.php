@@ -9,6 +9,7 @@ include '../Config/connectServerI.php';
 //	print "$key has a value of $value";
 //}
 
+$eor = false;
 $bind_id = $_REQUEST["lotid"];
 $bind_avail = $_REQUEST["available"];
 
@@ -19,18 +20,18 @@ $stmt->execute();
 $stmt->store_result();
 
 $meta = $stmt->result_metadata();
-
-while ($columnName = $meta->fetch_field()) {
+while ($columnName = $meta->fetch_field())
+{
 	$columns[] = &$results[$columnName->name];
 }
-call_user_func_array(array($stmt, 'bind_result'), $columns);
 
-while ($stmt->fetch())
+while (!$eor)
 {
-	$output[] = $results;
+	call_user_func_array(array($stmt, 'bind_result'), $columns);
+	
+	if ($stmt->fetch()) { $output[] = $results;	}
+	else { $eor = true; }
 }
-
-//$output[] = $results;
 
 print(json_encode($output));
 
