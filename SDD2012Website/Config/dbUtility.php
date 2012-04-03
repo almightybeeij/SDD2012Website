@@ -22,6 +22,13 @@ function fetchArray (&$statement)
 
 function bindParameters (&$parameters)
 {
+	$params = array();
+	
+	for ($i = 1; $i < sizeof($parameters); $i++)
+	{
+		$params[$i - 1] = $parameters[$i];
+	}
+	
 	call_user_func_array(mysqli_stmt_bind_param, $parameters);
 }
 
