@@ -9,19 +9,22 @@ include '../Config/connectServerI.php';
 //}
 
 echo $conn_mysqli->host_info . "<br/><br/>";
-echo phpversion();
 
 $bind_id = $_GET["lotid"];
 
 $stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = ?");
 $stmt->bind_param("i", $bind_id);
 $stmt->execute();
+$stmt->store_result();
+$meta = $stmt->result_metadata();
+while ($columnName = $meta->fetch_field()) {
+	$columns[] = &$results[$columnName->name];
+}
+call_user_func_array(array($stmt, 'bind_result'), $columns);
 
-$res = $stmt->get_result();
+$stmt->fetch();
 
-$row = $res->fetch_array(MYSQLI_NUM);
-
-print(json_encode($row));
+echo var_dump($results);
 
 //$out_boundary = NULL;
 //$stmt->bind_result($out_boundary);
