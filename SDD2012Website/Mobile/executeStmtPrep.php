@@ -11,7 +11,7 @@ include '../Config/connectServerI.php';
 
 $bind_id = $_REQUEST["lotid"];
 
-$stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = ?");
+$stmt = $conn_mysqli->prepare("SELECT Boundary1, Boundary2 FROM parkinglot WHERE lotid = ?");
 
 $stmt->bind_param("i", $bind_id);
 $stmt->execute();
