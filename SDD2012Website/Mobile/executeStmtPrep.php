@@ -16,8 +16,12 @@ $stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = ?"
 $stmt->bind_param("i", $bind_id);
 $stmt->execute();
 
-$out_boundary = NULL;
-$stmt->bind_result($out_boundary);
+$res = $stmt->get_result();
+
+var_dump($res->fetch_all());
+
+//$out_boundary = NULL;
+//$stmt->bind_result($out_boundary);
 
 //$md = $stmt->result_metadata();
 //$output = array();
@@ -25,9 +29,9 @@ $stmt->bind_result($out_boundary);
 
 //print(json_encode($output));
 
-while ($stmt->fetch()) {
-	echo $out_boundary;
-}
+//while ($stmt->fetch()) {
+//	$output[0] = array($out_boundary);
+//}
 
 include '../Config/closedbServerI.php';
 
