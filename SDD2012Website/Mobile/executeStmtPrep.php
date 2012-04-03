@@ -24,7 +24,7 @@ call_user_func_array(array($stmt, 'bind_result'), $columns);
 
 $stmt->fetch();
 
-echo var_dump($results);
+print(json_encode($results));
 
 //$out_boundary = NULL;
 //$stmt->bind_result($out_boundary);
