@@ -20,4 +20,9 @@ function fetchArray (&$statement)
 	return (count($out) == 0) ? false : $out;
 }
 
+function bindParameters (&$parameters)
+{
+	call_user_func_array(mysqli_stmt_bind_param, $parameters);
+}
+
 ?>
