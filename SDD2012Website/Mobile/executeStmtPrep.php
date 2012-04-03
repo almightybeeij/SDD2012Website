@@ -9,6 +9,7 @@ include '../Config/connectServerI.php';
 //}
 
 echo $conn_mysqli->host_info . "<br/><br/>";
+echo phpversion();
 
 $bind_id = $_GET["lotid"];
 
