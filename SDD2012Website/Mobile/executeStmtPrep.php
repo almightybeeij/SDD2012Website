@@ -25,9 +25,12 @@ while ($columnName = $meta->fetch_field()) {
 }
 call_user_func_array(array($stmt, 'bind_result'), $columns);
 
-$stmt->fetch();
+while ($stmt->fetch())
+{
+	$output[] = $results;
+}
 
-$output[] = $results;
+//$output[] = $results;
 
 print(json_encode($output));
 
