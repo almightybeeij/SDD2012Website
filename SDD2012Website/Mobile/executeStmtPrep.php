@@ -10,7 +10,7 @@ include '../Config/connectServerI.php';
 
 //echo $conn_mysqli->host_info . "<br/><br/>";
 
-$bind_id = $_GET["lotid"];
+$bind_id = $_REQUEST["lotid"];
 
 $stmt = $conn_mysqli->prepare("SELECT Boundary1 FROM parkinglot WHERE lotid = ?");
 $stmt->bind_param("i", $bind_id);
