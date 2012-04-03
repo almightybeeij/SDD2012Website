@@ -8,7 +8,7 @@ include '../Config/connectServerI.php';
 //	print "$key has a value of $value";
 //}
 
-echo $conn_mysqli->host_info . "<br/><br/>";
+//echo $conn_mysqli->host_info . "<br/><br/>";
 
 $bind_id = $_GET["lotid"];
 
