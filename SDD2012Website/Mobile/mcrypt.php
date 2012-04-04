@@ -2,8 +2,8 @@
 
 class MCrypt
 {
-   	private $iv = 'sdd2012pm'; #Same as in JAVA
-    private $key = 'cdlwcdlw'; #Same as in JAVA
+   	private $iv = 'sdd2012parkingmn';
+    private $key = 'cdlwcdlw12345678';
 
     function __construct() { }
 
