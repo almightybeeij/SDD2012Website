@@ -3,7 +3,7 @@
 session_start();
 
 include '../Config/connectServerI.php';
-include '../Config/dbUtility.php';
+include '../Config/mysqliUtility.php';
 
 $vars = array();
 
@@ -12,27 +12,28 @@ foreach ($_REQUEST as $key => $value)
 	$vars[] = $value;	
 }
 
-var_dump($vars);
-
 $bind_id = $_REQUEST["lotid"];
 $bind_avail = $_REQUEST["available"];
 
 $sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?";
 $stmt = $conn_mysqli->prepare($sql);
 
-$bindParamsMethod = new ReflectionMethod('mysqli_stmt', 'bind_param');
-$bindParamsReferences = array();
-$typeDefinitionString = array_shift($vars);
-foreach($vars as $key => $value){
-	$bindParamsReferences[$key] = &$vars[$key];
-}
+bindParameters($stmt, $vars);
 
-array_unshift($bindParamsReferences,$typeDefinitionString);
-$bindParamsMethod->invokeArgs($stmt,$bindParamsReferences);
+// $bindParamsMethod = new ReflectionMethod('mysqli_stmt', 'bind_param');
+// $bindParamsReferences = array();
+// $typeDefinitionString = array_shift($vars);
+// foreach($vars as $key => $value){
+// 	$bindParamsReferences[$key] = &$vars[$key];
+// }
 
-//call_user_func_array(mysqli_stmt_bind_param, $vars);
+// array_unshift($bindParamsReferences,$typeDefinitionString);
+// $bindParamsMethod->invokeArgs($stmt,$bindParamsReferences);
 
-//$stmt->bind_param("ii", $bind_id, $bind_avail);
+// call_user_func_array(mysqli_stmt_bind_param, $vars);
+
+// $stmt->bind_param("ii", $bind_id, $bind_avail);
+
 $stmt->execute();
 
 $output = array();
