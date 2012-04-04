@@ -5,6 +5,15 @@ session_start();
 include '../Config/connectServerI.php';
 include '../Config/dbUtility.php';
 
+$vars = array();
+
+foreach ($_REQUEST as $key => $value)
+{
+	$vars[] = $value;	
+}
+
+var_dump($vars);
+
 $bind_id = $_REQUEST["lotid"];
 $bind_avail = $_REQUEST["available"];
 
