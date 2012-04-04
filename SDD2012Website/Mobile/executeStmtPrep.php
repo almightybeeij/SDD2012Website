@@ -4,6 +4,8 @@ include '../Config/connectServerI.php';
 include '../Config/mysqliUtility.php';
 include '../Mobile/mcrypt.php';
 
+error_reporting(E_ALL);
+
 $vars = array();
 
 // Get all request variables
@@ -15,22 +17,12 @@ foreach ($_REQUEST as $key => $value)
 // Sql is first variable
 $sql = array_shift($vars);
 
-try
-{
-	$algorithms = mcrypt_list_algorithms("/usr/local/lib/libmcrypt");
-	var_dump($algorithms);
-}
-catch (Exception $e)
-{
-	echo $e->getMessage();
-}
-
 $mcrypt = new MCrypt();
 $encrypted = $mcrypt->encrypt("Test");
 echo $encrypted;
 
-// $decrypted = $mcrypt->decrypt($sql);
-// echo $decrypted;
+$decrypted = $mcrypt->decrypt($encrypted);
+echo $decrypted;
 
 // Create prepared statement
 $stmt = $conn_mysqli->prepare($sql);

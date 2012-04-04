@@ -14,7 +14,7 @@ class MCrypt
 	
 	    echo $iv;
 	    
-	    $td = mcrypt_module_open('rijndael-128', '/usr/lib/libmcrypt', 'cbc', $iv);
+	    $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
 	
 	    echo $td;
 	    
