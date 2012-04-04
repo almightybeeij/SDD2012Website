@@ -21,9 +21,14 @@ $sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?"
 $stmt = $conn_mysqli->prepare($sql);
 
 $bindParamsMethod = new ReflectionMethod('mysqli_stmt', 'bind_param');
-echo $bindParamsMethod;
+$bindParamsReferences = array();
+$typeDefinitionString = array_shift($vars);
+foreach($vars as $key => $value){
+	$bindParamsReferences[$key] = &$vars[$key];
+}
 
-$bindParamsMethod->invokeArgs($stmt,$vars);
+array_unshift($bindParamsReferences,$typeDefinitionString);
+$bindParamsMethod->invokeArgs($stmt,$bindParamsReferences);
 
 //call_user_func_array(mysqli_stmt_bind_param, $vars);
 
