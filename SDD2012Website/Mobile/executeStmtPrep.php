@@ -21,6 +21,8 @@ $sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?"
 $stmt = $conn_mysqli->prepare($sql);
 
 $bindParamsMethod = new ReflectionMethod('mysqli_stmt', 'bind_param');
+echo $bindParamsMethod;
+
 $bindParamsMethod->invokeArgs($stmt,$vars);
 
 //call_user_func_array(mysqli_stmt_bind_param, $vars);
