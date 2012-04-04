@@ -52,7 +52,7 @@ if ($password == $password2)
 		$response = $response . "Password Updated Successfully<br>Click Link to go to the <a href='index.php'>Login Page</a>";
 	}
 	else 
-		$response = $response . "You did not enter a valid email";
+		$response = $response . "<font color='red'>You did not enter a valid email</font>";
 	
 
 }

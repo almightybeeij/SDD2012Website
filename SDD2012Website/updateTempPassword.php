@@ -18,7 +18,7 @@
 			<label id="password2Label" for="password2TextBox">Enter Your Password Again:</label>
 			<input id="password2TextBox" name="password2TextBox" type="password" />
 			<br>
-			<button type="button"onclick="updatePassword(document.getElementById('emailTextBox').value,document.getElementById('passwordTextBox').value,document.getElementById('password2TextBox').value )">Email Password</button>
+			<button type="button"onclick="updatePassword(document.getElementById('emailTextBox').value,document.getElementById('passwordTextBox').value,document.getElementById('password2TextBox').value )">Update Password</button>
 			<br><br> 
 			<div id="passwordStatus"></div>
 		</div>
