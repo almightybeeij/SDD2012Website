@@ -35,7 +35,7 @@
 						<input id="emailText" type='text' name='email' /></br> 
 						<label id="passwordLabel" for="password">Password:</label> 
 						<input id="passwordText" type='password' name='password' /></br>
-						<?php if ($link == true) echo "<a href='forgot.php'>Forgot Password?</a>"; ?>
+						<?php if ($link == true) echo "<a href='forgotPassword.php'>Forgot Password?</a>"; ?>
 						</label><input id="submit" type='submit' name='submit'
 							value='Sign In' />
 					</form>

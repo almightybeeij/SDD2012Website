@@ -43,7 +43,7 @@ session_start();
 			}
 			
 			// Prepare the sql insert statement passing along the posted values
-			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$adminFlag','$facultyFlag','$studentFlag');";
+			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$adminFlag','$facultyFlag','$studentFlag',0);";
 
 			// Get result from the mysql query execution
 			$result = mysql_query($sql);

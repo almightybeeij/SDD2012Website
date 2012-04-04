@@ -53,6 +53,7 @@
 						else 
 						{
 							$sha256Pass = hash ( 'sha256' , $_POST['password1TextBox'] );
+							
 							$sqlUpdate = "update client set password='$sha256Pass' where email='$_SESSION[email]';";
 							$result = mysql_query($sqlUpdate);
 							
@@ -60,6 +61,8 @@
 								die('Invalid query: ' . mysql_error());
 							
 							$_SESSION['password']=$sha256Pass;
+							
+							echo "<br>Password Update Succesfull";
 							
 						}
 					}
@@ -92,10 +95,11 @@
 					$_SESSION['email'] = $_POST['emailTextBox'];
 
 					echo "<br>Update Succesfull";
+					
 				}
 					
 
-				/* This part of the code chanes the cells in the table to text boxes so the user can update information
+				/* This part of the code changes the cells in the table to text boxes so the user can update information
 				 * This is reached by the user clicking the edit button
 				* PHP_SELF is used to post back to same page
 				* isset checks to see if the edit value is set in the $_POST array

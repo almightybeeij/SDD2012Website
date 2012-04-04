@@ -1,19 +1,45 @@
+<html><head></head><body>
+
 <?php
 
-include 'config.php';
-include 'connect.php';
+include('Mail.php');
 
-$sql = "select * from parking_lot;";
+echo "HERE WE GO!!<br>";
 
-$result = mysql_query($sql);
+$recipients = 'software.design.development@gmail.com'; //CHANGE
 
-if (!$result) 
-    die('Invalid query: ' . mysql_error());
+$headers['From']    = 'software.design.development@gmail.com'; //CHANGE
+$headers['To']      = 'software.design.development@gmail.com'; //CHANGE
+$headers['Subject'] = 'Test message';
 
-$num_results = mysql_num_rows($result);
+$body = 'Test message';
 
-echo($num_results);
+// Define SMTP Parameters
 
-include 'closedb.php';
+$params['host'] = 'ssl://smtp.gmail.com';
+$params['port'] = '465';
+$params['auth'] = 'true';
+$params['username'] = 'software.design.development@gmail.com'; //CHANGE
+$params['password'] = 'sddspring2012'; //CHANGE
 
+/* The following option enables SMTP debugging and will print the SMTP 
+conversation to the page, it will only help with authentication issues,
+if PEAR::Mail is not installed you won't get this far. */
+
+$params['debug'] = 'true';
+
+// Create the mail object using the Mail::factory method
+
+$mail_object =& Mail::factory('smtp', $params);
+
+// Print the parameters you are using to the page
+
+foreach ($params as $p){
+        echo "$p<br />";
+}
+
+// Send the message
+error_reporting(E_ALL);
+$mail_object->send($recipients, $headers, $body);
 ?>
+</body></html>
