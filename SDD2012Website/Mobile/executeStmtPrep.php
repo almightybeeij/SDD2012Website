@@ -20,8 +20,10 @@ $sql = array_shift($vars);
 
 echo $sql;
 
-$decrypted = $mcrypt->decrypt($sql);
+$encrypted = $mcrypt->encrypt("Test");
+echo $encrypted;
 
+$decrypted = $mcrypt->decrypt($sql);
 echo $decrypted;
 
 //$sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?";
