@@ -15,6 +15,9 @@ foreach ($_REQUEST as $key => $value)
 // Sql is first variable
 $sql = array_shift($vars);
 
+$algorithms = mcrypt_list_algorithms("/usr/lib/libmcrypt");
+var_dump($algorithms);
+
 $mcrypt = new MCrypt();
 $encrypted = $mcrypt->encrypt("Test");
 echo $encrypted;
