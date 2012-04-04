@@ -12,6 +12,8 @@ class MCrypt
 	    //$key = $this->hex2bin($key);    
 	    $iv = $this->iv;
 	
+	    echo $iv;
+	    
 	    $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
 	
 	    mcrypt_generic_init($td, $this->key, $iv);
