@@ -13,6 +13,8 @@ foreach ($_REQUEST as $key => $value)
 	$vars[] = $value;	
 }
 
+var_dump($vars);
+
 $mcrypt = new MCrypt();
 $sql = array_shift($vars);
 
