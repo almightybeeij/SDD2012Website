@@ -17,7 +17,7 @@ $sql = array_shift($vars);
 
 try
 {
-	$algorithms = mcrypt_list_algorithms("/usr/lib/libmcrypt");
+	$algorithms = mcrypt_list_algorithms("/usr/local/lib/libmcrypt");
 	var_dump($algorithms);
 }
 catch (Exception $e)
