@@ -13,18 +13,14 @@ foreach ($_REQUEST as $key => $value)
 	$vars[] = $value;	
 }
 
-var_dump($vars);
-
-$mcrypt = new MCrypt();
 $sql = array_shift($vars);
 
-echo $sql;
+// $mcrypt = new MCrypt();
+// $encrypted = $mcrypt->encrypt("Test");
+// echo $encrypted;
 
-$encrypted = $mcrypt->encrypt("Test");
-echo $encrypted;
-
-$decrypted = $mcrypt->decrypt($sql);
-echo $decrypted;
+// $decrypted = $mcrypt->decrypt($sql);
+// echo $decrypted;
 
 //$sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?";
 $stmt = $conn_mysqli->prepare($sql);
