@@ -28,10 +28,29 @@ ini_set('display_errors', 1);
 	$num_results = mysql_num_rows($result);
 	if ($num_results <= 0)
 	{
-		include 'Config/closedbServer.php';
-		#header("Location: invalid.php");
-		$_SESSION['invalid'] = 'invalidEmailAndPassword';
-		header("Location: index.php");
+		
+		$sqlTempCheck = "select * from client where email='$_POST[email]' and tempPassFlag=1;";
+		
+		$resultTempCheck = mysql_query($sqlTempCheck);
+		if (!$result)
+			die('Invalid query: ' . mysql_error());
+		
+		$tempPassword_result = mysql_num_rows($resultTempCheck);
+		if($tempPassword_result > 0)
+		{
+			include 'Config/closedbServer.php';
+			#header("Location: invalid.php");
+			//$_SESSION['invalid'] = 'invalidEmailAndPassword';
+			header("Location: updateTempPassword.php");
+		}
+		else 
+		{
+			include 'Config/closedbServer.php';
+			#header("Location: invalid.php");
+			$_SESSION['invalid'] = 'invalidEmailAndPassword';
+			header("Location: index.php");
+		}
+		
 	}
 	else
 	{
