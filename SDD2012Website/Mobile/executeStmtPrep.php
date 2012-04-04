@@ -4,6 +4,7 @@ session_start();
 
 include '../Config/connectServerI.php';
 include '../Config/mysqliUtility.php';
+include '../Mobile/mcrypt.php';
 
 $vars = array();
 
@@ -12,7 +13,16 @@ foreach ($_REQUEST as $key => $value)
 	$vars[] = $value;	
 }
 
+var_dump($vars);
+
+$mcrypt = new MCrypt();
 $sql = array_shift($vars);
+
+echo $sql;
+
+$decrypted = $mcrypt->decrypt($sql);
+
+echo $decrypted;
 
 //$sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?";
 $stmt = $conn_mysqli->prepare($sql);
