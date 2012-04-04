@@ -22,7 +22,7 @@ echo $sql;
 
 $decrypted = $mcrypt->decrypt($sql);
 
-echo $sql;
+echo $decrypted;
 
 //$sql = "SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?";
 $stmt = $conn_mysqli->prepare($sql);
