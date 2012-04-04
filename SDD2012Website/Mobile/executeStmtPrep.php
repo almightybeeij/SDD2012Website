@@ -15,6 +15,9 @@ foreach ($_REQUEST as $key => $value)
 
 $mcrypt = new MCrypt();
 $sql = array_shift($vars);
+
+echo $sql;
+
 $decrypted = $mcrypt->decrypt($sql);
 
 echo $sql;
