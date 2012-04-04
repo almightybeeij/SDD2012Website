@@ -12,14 +12,14 @@ foreach ($_REQUEST as $key => $value)
 	$vars[] = $value;	
 }
 
-var_dump($vars);
-
 $bind_id = $_REQUEST["lotid"];
 $bind_avail = $_REQUEST["available"];
 
 $stmt = $conn_mysqli->prepare("SELECT * FROM parkingspace WHERE parkinglot_lotid = ? and available = ?");
 
-$stmt->bind_param("ii", $bind_id, $bind_avail);
+call_user_func_array(mysqli_stmt_bind_param, $vars);
+
+//$stmt->bind_param("ii", $bind_id, $bind_avail);
 $stmt->execute();
 
 $output = array();
