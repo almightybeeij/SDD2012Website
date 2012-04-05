@@ -8,11 +8,12 @@
 	<div id="innerContainer">
 	<?php include "menuAdmin"?>
 		<div id="rightContentPane">
-			Right Content Pane<br>			
+			Right Content Pane<br>
+			Edit Parking Page<br>			
 		</div>
 		<div id="mainContentPane">
 			Main Content Pane<br>
-			Admin Edit Parking Page			
+			Admin Edit Parking Page<br>			
 		</div>
 	</div>
 </div>
