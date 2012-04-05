@@ -50,7 +50,7 @@ session_start();
 			
 			// If query failed then print error
 			if (!$result)
-				die('Invalid query: ' . mysql_error());
+				die('Invalid query FUCK YOU!!: ' . mysql_error());
 
 			// Start session cookie and enter appropriate variables to reflect the new session
 			$sessionCookie = hash ('sha256', time());
