@@ -18,7 +18,6 @@ $sql = array_shift($vars);
 // Decrypt sql statement
 $mcrypt = new MCrypt();
 $decrypted = $mcrypt->decrypt($sql);
-echo $decrypted;
 
 // Create prepared statement
 $stmt = $conn_mysqli->prepare($decrypted);
