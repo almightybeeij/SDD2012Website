@@ -43,7 +43,7 @@ session_start();
 			}
 			
 			// Prepare the sql insert statement passing along the posted values
-			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$adminFlag','$facultyFlag','$studentFlag',0);";
+			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$adminFlag','$facultyFlag','$studentFlag',0,0);";
 
 			// Get result from the mysql query execution
 			$result = mysql_query($sql);
@@ -55,11 +55,12 @@ session_start();
 			// Start session cookie and enter appropriate variables to reflect the new session
 			$sessionCookie = hash ('sha256', time());
 			$time = time();
-			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$time');";
-
 			$_SESSION['email'] = $_POST['emailTextBox'];
 			$_SESSION['password'] = $sha256Pass;
 			$_SESSION['sessionCookie'] = $sessionCookie;
+
+			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[emailTextBox]','$time');";
+
 
 			$resultSession = mysql_query($sqlSession);
 			if (!$resultSession)
