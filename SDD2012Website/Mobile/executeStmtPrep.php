@@ -32,13 +32,13 @@ $stmt->execute();
 
 // Bind variables
 $output = array();
-$output = fetchArray($stmt);
+//$output = fetchArray($stmt);
 
 // Fetch results
-while ($stmt->fetch())
+for ($i = 0; $i < $stmt->num_rows; $i++)
 {
 	// Build JSON encoded string
-	$outputArray[] = $output;
+	$outputArray[] = fetchArray($stmt);
 }
 
 print(json_encode($outputArray));
