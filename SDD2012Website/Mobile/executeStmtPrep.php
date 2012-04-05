@@ -41,7 +41,7 @@ while ($stmt->fetch())
 	$outputArray[] = $output;
 }
 
-print_r(array_values($outputArray));
+print(json_encode($outputArray));
 
 // Close mysqli connection
 include '../Config/closedbServerI.php';
