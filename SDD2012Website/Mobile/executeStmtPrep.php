@@ -38,7 +38,6 @@ $output = fetchArray($stmt);
 while ($stmt->fetch())
 {
 	$outputArray[$elem] = array();
-	//$outputArray[] = $output;
 	foreach($output as $key=>$value)
 	{
 		$outputArray[$elem][$key] = $value;
@@ -46,6 +45,7 @@ while ($stmt->fetch())
 	$elem++;
 }
 
+// Output JSON representation
 print(json_encode($outputArray));
 
 // Close mysqli connection
