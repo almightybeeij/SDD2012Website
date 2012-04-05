@@ -38,8 +38,10 @@ $output = fetchArray($stmt);
 while ($stmt->fetch())
 {
 	// Build JSON encoded string
-	print(json_encode($output));
+	$outputArray[] = json_encode($output);
 }
+
+echo $outputArray;
 
 // Close mysqli connection
 include '../Config/closedbServerI.php';
