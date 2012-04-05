@@ -34,7 +34,7 @@
 #rightPane
 {
 	/*position:fixed;*/
-        background-image:url('../Images/FairOaksNight.jpg');
+        background-image:url('Images/FairOaksNight.jpg');
 	float:left;
 	/* display: inline-block; */
 	width:100px;

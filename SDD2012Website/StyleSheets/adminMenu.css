@@ -1,0 +1,51 @@
+ul,li,ol
+{
+        font:12px VERDANA;
+        
+}
+ul
+{
+    list-style:none;
+	margin: 0px;
+	padding:0px;
+	
+}
+li
+{   
+	display: inline-block;
+	zoom: 1;
+    margin:10px 0px; 
+	padding:0px 10px;
+	
+}
+
+a:link 
+{
+	text-decoration:none;
+	/*color:#003366;*/
+	color:white;
+}
+a:visited
+{
+	text-decoration:none;
+	/*color:#003366;*/
+	color:white;
+	
+}
+a:hover
+{
+	text-decoration:none;
+	color:#FFCC00;
+}
+#menu
+{
+	display: block;
+	width:956px;
+	background-color:grey;
+	font:16px Verdana;
+	margin: auto;
+	border:2px ridge black;
+	text-align:center;
+}	
+
+

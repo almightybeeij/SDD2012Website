@@ -35,7 +35,7 @@
 			</div>
 
 			<!-- Right Side Pane-->
-			<div id="rightPane">This is the right pane</div>
+			<div id="rightPane" style="background-image: url('Images/UbuntuBlack.jpg')">This is the right pane</div>
 		</div>
 		<!-- Footer-->
 		<div id="footer">
