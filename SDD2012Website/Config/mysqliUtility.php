@@ -16,7 +16,6 @@ function fetchArray (&$statement)
 	}
 
 	call_user_func_array(mysqli_stmt_bind_result, $fields);
-	mysqli_stmt_fetch($statement);
 	
 	return (count($out) == 0) ? false : $out;
 }
