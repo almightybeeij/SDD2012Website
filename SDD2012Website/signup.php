@@ -55,15 +55,18 @@ session_start();
 			// Start session cookie and enter appropriate variables to reflect the new session
 			$sessionCookie = hash ('sha256', time());
 			$time = time();
-			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$time');";
-
 			$_SESSION['email'] = $_POST['emailTextBox'];
 			$_SESSION['password'] = $sha256Pass;
 			$_SESSION['sessionCookie'] = $sessionCookie;
 
+			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[emailTextBox]','$time');";
+
+
 			$resultSession = mysql_query($sqlSession);
 			if (!$resultSession)
+			{		
 				die('Invalid query: ' . mysql_error());
+			}
 
 			include 'Config/closedbServer.php';
 			header("Location: home.php");
