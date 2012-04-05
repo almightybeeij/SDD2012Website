@@ -4,7 +4,7 @@ include '../Config/connectServerI.php';
 include '../Config/mysqliUtility.php';
 include '../Mobile/mcrypt.php';
 
-$outputString;
+$elem=0;
 $outputArray = array();
 $vars = array();
 
@@ -37,8 +37,13 @@ $output = fetchArray($stmt);
 // Fetch results
 while ($stmt->fetch())
 {
-	// Build JSON encoded string
-	$outputArray[] = $output;
+	$outputArray[$elem] = array();
+	//$outputArray[] = $output;
+	foreach($output as $key=>$value)
+	{
+		$outputArray[$elem][$key] = $value;
+	}
+	$elem++;
 }
 
 print(json_encode($outputArray));
