@@ -64,7 +64,9 @@ session_start();
 
 			$resultSession = mysql_query($sqlSession);
 			if (!$resultSession)
+			{		
 				die('Invalid query: ' . mysql_error());
+			}
 
 			include 'Config/closedbServer.php';
 			header("Location: home.php");
