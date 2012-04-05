@@ -38,7 +38,7 @@ $output = fetchArray($stmt);
 while ($stmt->fetch())
 {
 	// Build JSON encoded string
-	$outputArray[] = json_encode($output);
+	$outputArray[] = $output;
 }
 
 print(json_encode($outputArray));
