@@ -4,8 +4,8 @@ include '../Config/connectServerI.php';
 include '../Config/mysqliUtility.php';
 include '../Mobile/mcrypt.php';
 
-error_reporting(E_ALL);
-
+$elem=0;
+$outputArray = array();
 $vars = array();
 
 // Get all request variables
@@ -17,15 +17,12 @@ foreach ($_REQUEST as $key => $value)
 // Sql is first variable
 $sql = array_shift($vars);
 
+// Decrypt sql statement
 $mcrypt = new MCrypt();
-$encrypted = $mcrypt->encrypt("Test");
-echo $encrypted;
-
-$decrypted = $mcrypt->decrypt($encrypted);
-echo $decrypted;
+$decrypted = $mcrypt->decrypt($sql);
 
 // Create prepared statement
-$stmt = $conn_mysqli->prepare($sql);
+$stmt = $conn_mysqli->prepare($decrypted);
 
 // Bind parameters to statement
 bindParameters($stmt, $vars);
@@ -40,9 +37,16 @@ $output = fetchArray($stmt);
 // Fetch results
 while ($stmt->fetch())
 {
-	// Return JSON encoded string
-	print(json_encode($output));
+	$outputArray[$elem] = array();
+	foreach($output as $key=>$value)
+	{
+		$outputArray[$elem][$key] = $value;
+	}
+	$elem++;
 }
+
+// Output JSON representation
+print(json_encode($outputArray));
 
 // Close mysqli connection
 include '../Config/closedbServerI.php';
