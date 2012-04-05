@@ -4,6 +4,8 @@ include '../Config/connectServerI.php';
 include '../Config/mysqliUtility.php';
 include '../Mobile/mcrypt.php';
 
+$outputString;
+$outputArray = array();
 $vars = array();
 
 // Get all request variables
@@ -35,9 +37,12 @@ $output = fetchArray($stmt);
 // Fetch results
 while ($stmt->fetch())
 {
-	// Return JSON encoded string
-	print(json_encode($output));
+	// Build JSON encoded string
+	$outputString .= json_encode($output);
 }
+
+$outputArray[] = $outputString;
+print($outputArray);
 
 // Close mysqli connection
 include '../Config/closedbServerI.php';
