@@ -57,7 +57,7 @@ session_start();
 			$time = time();
 			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[email]','$time');";
 
-			$_SESSION['email'] = $_POST['email'];
+			$_SESSION['email'] = $_POST['emailTextBox'];
 			$_SESSION['password'] = $sha256Pass;
 			$_SESSION['sessionCookie'] = $sessionCookie;
 
