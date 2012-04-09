@@ -28,6 +28,7 @@ ini_set('display_errors', 1);
 	$num_results = mysql_num_rows($result);
 	if ($num_results <= 0)
 	{
+	
 		
 		$sqlTempCheck = "select * from client where email='$_POST[email]' and tempPassFlag=1 and password='$_POST[password]';";
 		
