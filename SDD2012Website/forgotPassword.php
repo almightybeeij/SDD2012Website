@@ -1,3 +1,7 @@
+<?php 
+session_destroy();
+ob_end_flush();
+?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"

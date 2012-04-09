@@ -20,13 +20,28 @@
 				if (isset ($_POST['update']))
 				{
 					
-					$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]',adminFlag=$_POST[adminFlagTextBox],facultyFlag=$_POST[facultyFlagTextBox],studentFlag=$_POST[studentFlagTextBox],handicapFlag=$_POST[handicapFlagTextBox],tempPassFlag=$_POST[tempPassFlagTextBox] where password='$_POST[password]';";
-					$result = mysql_query($sqlUpdate);
-
-					if (!$result)
-						die('Invalid query: ' . mysql_error());
+					if($_POST['password'] == '' && $_POST['tempPassFlag'] == 1)
+					{
+						$sqlInsert = "insert into client values ('$_POST[emailEditTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapTextBox]','$_POST[tempPassFlag]');";
+						
+						// Get result from the mysql query execution
+						$result = mysql_query($sqlInsert);
+							
+						// If query failed then print error
+						if (!$result)
+							die('Invalid query In Insert Statement: ' . mysql_error());
+					}
+					
 					else 
-						echo "Successfully update user with first name: $_POST[firstNameTextBox] and last name: $_POST[lastNameTextBox] with email of: $_POST[emailTextBox]";
+					{
+						$sqlUpdate = "update client set email='$_POST[emailEditTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]',adminFlag=$_POST[adminFlagTextBox],facultyFlag=$_POST[facultyFlagTextBox],studentFlag=$_POST[studentFlagTextBox],handicapFlag=$_POST[handicapFlagTextBox],tempPassFlag=$_POST[tempPassFlagTextBox] where password='$_POST[password]';";
+						$result = mysql_query($sqlUpdate);
+
+						if (!$result)
+							die('Invalid query in Update Statement: ' . mysql_error());
+						else 
+							echo "Successfully update user with first name: $_POST[firstNameTextBox] and last name: $_POST[lastNameTextBox] with email of: $_POST[emailTextBox]";
+					}
 					
 				}
 				if(isset ($_POST['edit']))
@@ -39,6 +54,25 @@
 					
 					echo"<table id='editTable'>";
 					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Admin</th><th>Faculty</th><th>Student</th><th>Handicap</th><th>Temp Password</th><th>Action</th></tr>";
+					
+					if($_POST['emailEdit'] == 'new' && $_POST['password'] == '')
+					{
+						echo "<form style='margin:0px' id='updateForm' name='updateForm' action='$PHP_SELF?>' method='post'>";
+						echo "<input type='hidden' name='password' value='$row[password]'/>";
+						echo "<tr>";
+						echo "<td><input type='text' style='width:100%' name='firstNameTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='lastNameTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='emailEditTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='adminFlagTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='facultyFlagTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='studentFlagTextBox' value='New'/></td>";
+						echo "<td><input type='text' style='width:100%' name='handicapFlagTextBox' value='New'/></td>";
+						echo "<td><input type='hidden' name='tempPassFlag' value='1'/>1</td>";
+						echo "<td><input id='edit' type='submit' name='update' value='Update'/></form></td>";
+						echo "</tr>";
+					}
+					
+					
 					while ($row = mysql_fetch_array($result))
 					{
 						
@@ -58,6 +92,7 @@
 							echo "<td><input id='update' type='submit' name='update' value='Update'/></form></td>";
 							echo "</tr>";
 						}
+						
 						else 
 						{
 							echo "<form style='margin:0px' id='editForm' name='editForm' action='$PHP_SELF?>' method='post'>";
@@ -90,8 +125,23 @@
 					if (!$result)
 						die('Invalid query: ' . mysql_error());
 
-					echo"<table id='preEditTable'>";
-					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Admin</th><th>Faculty</th><th>Student</th><th>Handicap</th><th>Temp Password</th><th>Action</th></tr>";
+					echo "<table id='preEditTable'>";
+					echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Admin</th><th>Faculty</th><th>Student</th><th>Handicap</th><th>Temp Password</th><th>Action</th></tr>";
+					
+					echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
+					echo "<input type='hidden' name='password' value='$row[password]'/>";
+					echo "<tr>";
+					echo "<td><input type='hidden' name='firstName' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='lastName' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='emailEdit' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='adminFlag' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='facultyFlag' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='studentFlag' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='handicapFlag' value='new'/>New</td>";
+					echo "<td><input type='hidden' name='tempPassFlag' value='new'/>New</td>";
+					echo "<td><input id='edit' type='submit' name='edit' value='Edit'/></form></td>";
+					echo "</tr>";
+					
 					while ($row = mysql_fetch_array($result))
 					{
 						echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
