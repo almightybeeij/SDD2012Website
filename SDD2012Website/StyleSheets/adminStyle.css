@@ -36,3 +36,31 @@ body
 	display:inline-block;
 	text-align:left;	
 }
+#mainContentPaneAdminUpdate
+{
+	width:920px;
+	margin: 0px;
+	padding: 10px;
+	display:inline-block;
+	text-align:left;	
+}
+#preEditTable
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	
+}
+#editTable
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	
+}
+tr,td
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;	
+}
