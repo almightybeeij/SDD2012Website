@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
 	{
 	
 		
-		$sqlTempCheck = "select * from client where email='$_POST[email]' and tempPassFlag=1 and password='$_POST[password]';";
+		$sqlTempCheck = "select * from client where email='$_POST[email]' and password='$_POST[password]' and tempPassFlag=1 ;";
 		
 		$resultTempCheck = mysql_query($sqlTempCheck);
 		if (!$result)
