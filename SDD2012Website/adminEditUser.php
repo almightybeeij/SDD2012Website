@@ -37,8 +37,7 @@
 				
 				if (isset ($_POST['update']))
 				{
-					//echo "Updating";
-					
+					// This means it's a new user that we are adding so we will insert into database
 					if($_POST['password'] == '' && $_POST['tempPassFlag'] == 1)
 					{
 						$sqlInsert = "insert into client values ('$_POST[emailTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapTextBox]','$_POST[tempPassFlag]');";
@@ -84,6 +83,7 @@
 						
 					}
 					
+					// This not a new user so we just want to update the user
 					else 
 					{
 						$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]',adminFlag=$_POST[adminFlagTextBox],facultyFlag=$_POST[facultyFlagTextBox],studentFlag=$_POST[studentFlagTextBox],handicapFlag=$_POST[handicapFlagTextBox],tempPassFlag=$_POST[tempPassFlagTextBox] where password='$_POST[password]';";
@@ -98,7 +98,6 @@
 				}
 				if(isset ($_POST['edit']))
 				{
-					//echo "Editing";
 					$sql = "select * from client;";
 					$result = mysql_query($sql);
 						
@@ -122,7 +121,7 @@
 						echo "<td><input type='text' style='width:100%' name='studentFlagTextBox' value='New'/></td>";
 						echo "<td><input type='text' style='width:100%' name='handicapFlagTextBox' value='New'/></td>";
 						echo "<td><input type='hidden' name='tempPassFlag' value='1'/>1</td>";
-						echo "<td><input id='edit' type='submit' name='update' value='Update'/></form></td>";
+						echo "<td><input id='edit' type='submit' name='update' value='Add'/></form></td>";
 						echo "</tr>";
 					}
 					else
@@ -146,7 +145,7 @@
 					
 					while ($row = mysql_fetch_array($result))
 					{
-						
+						// If this row's email matches the email we want to update then we will use text boxes
 						if ($row[email] == $_POST['email'])
 						{	
 							echo "<form style='margin:0px' id='updateForm' name='updateForm' action='$PHP_SELF?>' method='post'>";
@@ -164,6 +163,7 @@
 							echo "</tr>";
 						}
 						
+						// If this row's email deos not match the email we want to edit we will use hidden field to store vars
 						else 
 						{	
 							echo "<form style='margin:0px' id='editForm' name='editForm' action='$PHP_SELF?>' method='post'>";
@@ -186,10 +186,10 @@
 						
 
 				}
-				 
+
+				// This gets executed on the very first page load and as a fall through effect for updating and editing
 				else 
 				{
-					//echo "<br>Ol Yeller";
 					$sql = "select * from client;";
 
 					$result = mysql_query($sql);
@@ -225,7 +225,8 @@
 					echo "<input type='hidden' name='studentFlag' value='new'/>";
 					echo "<input type='hidden' name='handicapFlag' value='new'/>";
 					echo "<input type='hidden' name='tempPassFlag' value='new'/>";
-					echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
+					//echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
+					echo "<td></td>";
 					echo "</tr>";
 					
 					while ($row = mysql_fetch_array($result))
