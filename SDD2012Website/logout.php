@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-	if (isset($_SESSION['sessionCookie']))
+	if (isset($_SESSION['sessionCookie']) && $_SESSION['userType'] == "regular")
 	{
 
 		include 'Config/configServer.php';

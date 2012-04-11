@@ -15,7 +15,7 @@ ini_set('display_errors', 1);
 	$sha256Pass = hash ('sha256', $_POST['password']);
 	$sqlDelete = "delete from clientsession where Client_email='$_POST[email]';";
 	$resultDelete = mysql_query($sqlDelete);
-
+	$userType = NULL;
 
 
 	$sha256Pass = hash ( 'sha256' , $_POST['password'] );
@@ -55,7 +55,12 @@ ini_set('display_errors', 1);
 	}
 	else
 	{
-		//Use timestamp to create a a hash for session cooki
+		$row = mysql_fetch_array($result);
+		if($row['adminFlag'] == 1)
+			$userType = "admin";
+		else
+			$userType = "regular";
+		//Use timestamp to create a a hash for session cookie
 		$time = time();
 		$sessionCookie = hash ('sha256', $time);
 		
@@ -67,13 +72,17 @@ ini_set('display_errors', 1);
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['password'] = $sha256Pass;
 		$_SESSION['sessionCookie'] = $sessionCookie;
+		$_SESSION['userType'] = $userType;
 
 		$resultSession = mysql_query($sqlSession);
 		if (!$resultSession)
 			die('Invalid query: ' . mysql_error());
 
 		include 'Config/closedbServer.php';
-		header("Location: home.php");
+		if($userType == "admin")
+			header("Location: adminHome.php");
+		else
+			header("Location: home.php");
 	}
 
 	?>
