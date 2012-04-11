@@ -48,46 +48,53 @@
 					// This means it's a new user that we are adding so we will insert into database
 					if($_POST['password'] == '' && $_POST['tempPassFlag'] == 1)
 					{
-						$sqlInsert = "insert into client values ('$_POST[emailTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapTextBox]','$_POST[tempPassFlag]');";
-						
-						// Get result from the mysql query execution
-						$result = mysql_query($sqlInsert);
-							
-						// If query failed then print error
-						if (!$result)
-							die('Invalid query In Insert Statement: ' . mysql_error());
-						
-						//send email to new added user
-						$time = time();
-						$tempPassword = hash ('md5', $time);
-						
-						$tempPasswordHash = hash ('sha256',$tempPassword);
-						
-						$sqlUpdate = "update client set password='$tempPasswordHash'where email='$_POST[emailTextBox]';";
-						$result2 = mysql_query($sqlUpdate);
-						
-						if (!$result2)
-							die('Invalid query: ' . mysql_error());
-						
-						
-						$from = "software.design.development@gmail.com";
-						$to = $_POST[emailTextBox];
-						$subject = "Your new temporary password";
-						$body = "Hi,\n\nYou have been added to the database by an Administrator.\n Please use this temporary password to log in: $tempPasswordHash";
-						
-						$headers = array('From' => $from, 'To'=>$to, 'Subject'=>$subject);
-						
-						$smtp = Mail::factory('smtp', array('host' => "ssl://smtp.gmail.com", 'port' => '465', 'auth' => true, 'username' => "software.design.development@gmail.com", 'password' => "sddspring2012"));
-						
-						$mail = $smtp->send($to, $headers, $body);
-						
-						if(!(PEAR::isError($mail)))
+						$error = validateFields($_POST['firstNameTextBox'],$_POST['lastNameTextBox'],$_POST['emailTextBox'],$_POST['adminFlagTextBox'],$_POST['facultyFlagTextBox'],$_POST['studentFlagTextBox'],$_POST['handicapFlagTextBox'],1);
+						if(!isset($error))
 						{
-							echo "Mail With Temporary Password Sent Successfully to:<br>$_POST[firstNameTextBox] $_POST[lastNameTextBox] at email address of: $_POST[emailTextBox]";
-						}
-						else
-							echo "<pre>".$mail -> getMessage()."<br>".$mail->getCode()."</pre>";
+							$sqlInsert = "insert into client values ('$_POST[emailTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapTextBox]','$_POST[tempPassFlag]');";
 						
+							// Get result from the mysql query execution
+							$result = mysql_query($sqlInsert);
+							
+							// If query failed then print error
+							if (!$result)
+								die('Invalid query In Insert Statement: ' . mysql_error());
+						
+							//send email to new added user
+							$time = time();
+							$tempPassword = hash ('md5', $time);
+						
+							$tempPasswordHash = hash ('sha256',$tempPassword);
+						
+							$sqlUpdate = "update client set password='$tempPasswordHash'where email='$_POST[emailTextBox]';";
+							$result2 = mysql_query($sqlUpdate);
+						
+							if (!$result2)
+								die('Invalid query: ' . mysql_error());
+						
+						
+							$from = "software.design.development@gmail.com";
+							$to = $_POST[emailTextBox];
+							$subject = "Your new temporary password";
+							$body = "Hi,\n\nYou have been added to the database by an Administrator.\n Please use this temporary password to log in: $tempPasswordHash";
+						
+							$headers = array('From' => $from, 'To'=>$to, 'Subject'=>$subject);
+						
+							$smtp = Mail::factory('smtp', array('host' => "ssl://smtp.gmail.com", 'port' => '465', 'auth' => true, 'username' => "software.design.development@gmail.com", 'password' => "sddspring2012"));
+						
+							$mail = $smtp->send($to, $headers, $body);
+						
+							if(!(PEAR::isError($mail)))
+							{
+								echo "Mail With Temporary Password Sent Successfully to:<br>$_POST[firstNameTextBox] $_POST[lastNameTextBox] at email address of: $_POST[emailTextBox]";
+							}
+							else
+								echo "<pre>".$mail -> getMessage()."<br>".$mail->getCode()."</pre>";
+						}
+						else 
+						{
+							$errorKey = "NEW";
+						}
 						
 					}
 					
@@ -219,7 +226,16 @@
 					//Set up the very first row to be a row for adding users					
 					echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
 					echo "<input type='hidden' name='password' value='$row[password]'/>";
-					echo "<tr>";
+					//If previous attempt to edit fail highlight the row that had an error
+					if(isset($errorKey) && $errorKey == "NEW")
+					{
+						echo "<tr style='background-color: red'>";
+						$errorKey = NULL;
+							
+					}
+					else
+						echo "<tr>";
+					
 					echo "<td><input type='hidden' name='firstName' value='new'/>New</td>";
 					echo "<td><input type='hidden' name='lastName' value='new'/>New</td>";
 					echo "<td><input type='hidden' name='email' value='new'/>New</td>";

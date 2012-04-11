@@ -3,6 +3,18 @@ function validateFields($firstName, $lastName, $email, $adminFlag, $facultyFlag,
 {
 	$error = NULL;
 	
+	if(($adminFlag == 0 && $facultyFlag == $adminFlag) || ($adminFlag== 0 && $studentFlag == $adminFlag))
+	{
+		$error = "Your must select at least one user type<br>";
+		$error = $error . "Here were the flag values: $adminFlag, $facultyFlag, $studentFlag<br>";
+	}
+	
+	if($firstName == "New" && $lastName =="New")
+	{
+		$error = "You Must Not Leave a new user's First and Last name as 'New'! Changes to the database HAVE NOT been made.<br>";
+		$error = $error . "Here were the values: $firstName, $lastName<br>";
+	}
+	
 	if (empty($firstName) || empty($lastName) || empty($email))
 	{
 		$error = "You Must Not Leave a Field Blank! Changes to the database HAVE NOT been made.<br>";
