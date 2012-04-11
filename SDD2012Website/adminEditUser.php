@@ -19,7 +19,8 @@
 				include "Config/configServer.php";
 				include "Config/connectServer.php";
 				require_once "Mail.php";
-				include "Scripts/adminValidation.php";
+				include "Scripts/emailValidation.php";
+				include "Scripts/adminFieldValidation.php";
 				$error = NULL;
 				$errorKey = NULL;
 				?>

@@ -12,6 +12,10 @@ session_start();
 	include 'Config/configServer.php';
 	include 'Config/connectServer.php';
 	
+	include 'Scripts/emailValidation.php';
+	
+	$emailError = NULL;
+	
 	/* We are going to check if the page is posted back and make sure all the text boxes are filled with info
 	 * If all the boxes are filled with user information then we are going to proceed to checking if the passwords match or not
 	 * 
@@ -19,12 +23,14 @@ session_start();
 	if (isset($_POST['submit']) && !empty($_POST['firstNameTextBox']) && !empty($_POST['lastNameTextBox']) && !empty($_POST['emailTextBox']) && !empty($_POST['password']) && !empty($_POST['userTypeRadioButton']))
 	{
 
-		
+		$emailValidated = validEmail($_POST['emailTextBox']);
+		if(!$emailValidated)
+			$emailError = "Email is not a valid Email";
 		/* If the passwords match we can proceed to enter the information into the database
 		 * As of right now the information the user entered is not sanitized using htmlentities or strip
 		 * Will Implement this as time permits
 		*/
-		if($_POST['password'] == $_POST['password2'] )
+		if($_POST['password'] == $_POST['password2'] && $emailValidated)
 		{
 			$sha256Pass = hash ( 'sha256' , $_POST['password'] );
 			$adminFlag = 0;
@@ -58,6 +64,7 @@ session_start();
 			$_SESSION['email'] = $_POST['emailTextBox'];
 			$_SESSION['password'] = $sha256Pass;
 			$_SESSION['sessionCookie'] = $sessionCookie;
+			$_SESSION['userType'] = "regular"; 
 
 			$sqlSession = "insert into clientsession values ('$sessionCookie','$_POST[emailTextBox]','$time');";
 
@@ -112,12 +119,19 @@ session_start();
 				
 				<label name="emailLabel" for="emailTextBox">Email :</label> 
 				<input type='text' name='emailTextBox' value='<?= $_POST['emailTextBox']?>'/>
-				<?php 
+				<?php
+					$emailEmpty = NULL; 
 					if (empty($_POST['emailTextBox']) && isset($_POST['submit']))
 					{ 
 						echo "<font color='red'>*</font>";
 						$error = $error."Email Must Not Be Blank<br>";
-					}	  
+						$emailEmpty = true;
+					}
+					elseif (isset($_POST['submit']) && isset($emailError))
+					{
+						echo "<font color='red'>*</font>";
+						$error = $error."Email is not valid<br>";
+					}						  
 				?>
 				<br>
 
