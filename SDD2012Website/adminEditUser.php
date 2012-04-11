@@ -51,7 +51,7 @@
 						$error = validateFields($_POST['firstNameTextBox'],$_POST['lastNameTextBox'],$_POST['emailTextBox'],$_POST['adminFlagTextBox'],$_POST['facultyFlagTextBox'],$_POST['studentFlagTextBox'],$_POST['handicapFlagTextBox'],1);
 						if(!isset($error))
 						{
-							$sqlInsert = "insert into client values ('$_POST[emailTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapTextBox]','$_POST[tempPassFlag]');";
+							$sqlInsert = "insert into client values ('$_POST[emailTextBox]','NULL','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$_POST[adminFlagTextBox]','$_POST[facultyFlagTextBox]','$_POST[studentFlagTextBox]','$_POST[handicapFlagTextBox]','$_POST[tempPassFlag]');";
 						
 							// Get result from the mysql query execution
 							$result = mysql_query($sqlInsert);
