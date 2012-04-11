@@ -3,7 +3,7 @@ function validateFields($firstName, $lastName, $email, $adminFlag, $facultyFlag,
 {
 	$error = NULL;
 	
-	if(($adminFlag == 0 && $facultyFlag == $adminFlag) || ($adminFlag== 0 && $studentFlag == $adminFlag))
+	if(($adminFlag == 0) && ($facultyFlag == 0) && ($studentFlag == 0))
 	{
 		$error = "Your must select at least one user type<br>";
 		$error = $error . "Here were the flag values: $adminFlag, $facultyFlag, $studentFlag<br>";
