@@ -19,6 +19,9 @@
 				include "Config/configServer.php";
 				include "Config/connectServer.php";
 				require_once "Mail.php";
+				include "Scripts/adminValidation.php";
+				$error = NULL;
+				$errorKey = NULL;
 				?>
 				<br>
 				<?php
@@ -41,6 +44,7 @@
 				
 				if (isset ($_POST['update']))
 				{
+					$errorKey = NULL;
 					// This means it's a new user that we are adding so we will insert into database
 					if($_POST['password'] == '' && $_POST['tempPassFlag'] == 1)
 					{
@@ -90,13 +94,21 @@
 					// This not a new user so we just want to update the user
 					else 
 					{
-						$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]',adminFlag=$_POST[adminFlagTextBox],facultyFlag=$_POST[facultyFlagTextBox],studentFlag=$_POST[studentFlagTextBox],handicapFlag=$_POST[handicapFlagTextBox],tempPassFlag=$_POST[tempPassFlagTextBox] where password='$_POST[password]';";
-						$result = mysql_query($sqlUpdate);
+						$error = validateFields($_POST['firstNameTextBox'],$_POST['lastNameTextBox'],$_POST['emailTextBox'],$_POST['adminFlagTextBox'],$_POST['facultyFlagTextBox'],$_POST['studentFlagTextBox'],$_POST['handicapFlagTextBox'],$_POST['tempPassFlagTextBox']);
+						if (!isset($error))
+						{
+							$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]',adminFlag=$_POST[adminFlagTextBox],facultyFlag=$_POST[facultyFlagTextBox],studentFlag=$_POST[studentFlagTextBox],handicapFlag=$_POST[handicapFlagTextBox],tempPassFlag=$_POST[tempPassFlagTextBox] where password='$_POST[password]';";
+							$result = mysql_query($sqlUpdate);
 
-						if (!$result)
-							die('Invalid query in Update Statement: ' . mysql_error());
+							if (!$result)
+								die('Invalid query in Update Statement: ' . mysql_error());
+							else 
+								echo "Successfully update user with first name: $_POST[firstNameTextBox] and last name: $_POST[lastNameTextBox] with email of: $_POST[emailTextBox]";
+						}
 						else 
-							echo "Successfully update user with first name: $_POST[firstNameTextBox] and last name: $_POST[lastNameTextBox] with email of: $_POST[emailTextBox]";
+						{
+							$errorKey = $_POST['emailTextBox'];
+						}
 					}
 					
 				}
@@ -238,7 +250,16 @@
 						//Set up the edit form
 						echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
 						echo "<input type='hidden' name='password' value='$row[password]'/>";
-						echo "<tr>";						
+						
+						//If previous attempt to edit fail highlight the row that had an error
+						if(isset($errorKey) && $errorKey == $row['email'])
+						{
+							echo "<tr style='background-color: red'>";
+							$errorKey = NULL;
+							
+						}
+						else
+							echo "<tr>";						
 						echo "<td><input type='hidden' name='firstName' value='$row[firstName]'/>$row[firstName]</td>";
 						echo "<td><input type='hidden' name='lastName' value='$row[lastName]'/>$row[lastName]</td>";
 						echo "<td><input type='hidden' name='email' value='$row[email]'/>$row[email]</td>";
@@ -263,11 +284,13 @@
 						echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
 						echo "</tr>";
 					}
+					
 				}
 				Include "Config/closedbServer.php";
 				?>
-			</div>
-		</div>
+				<?php echo "<div>$error<br></div>";?>		
+			</div>			
+		</div>		
 	</div>
 	<?php 
 	}
