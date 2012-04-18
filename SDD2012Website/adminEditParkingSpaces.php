@@ -23,8 +23,11 @@
 </div>
 <?php
 	}
-	else 
-		echo "You are not logged in"; 
+else
+	{
+		header('Refresh: 3; URL= index.php'); 
+		echo "You are not logged in";
+	} 
 ?>
 </body>
 </html>

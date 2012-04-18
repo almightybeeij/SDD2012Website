@@ -20,7 +20,7 @@
 				include "Config/connectServer.php";
 				require_once "Mail.php";
 				include "Scripts/emailValidation.php";
-				include "Scripts/adminFieldValidation.php";
+				include "Scripts/adminUserFieldValidation.php";
 				$error = NULL;
 				$errorKey = NULL;
 				?>
@@ -301,7 +301,10 @@
 	<?php 
 	}
 	else
-		echo "You are not logged in"
+	{
+		header('Refresh: 3; URL= index.php');
+		echo "You are not logged in";
+	}
 	?>
 </body>
 </html>

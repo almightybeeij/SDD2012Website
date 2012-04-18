@@ -20,15 +20,67 @@
 			
 			include "Config/configServer.php";
 			include "Config/connectServer.php";
+			include "Scripts/adminParkingFieldValidation.php";
 			
+			$errorKey = "New";
+			$error = null;
 			
 				if(isset($_POST['delete']))
 				{
-					echo "YES SIR!!<br>";
+					if($_POST['lotId']!="new")
+					{
+						$sqlDelete = "delete from parkinglot where lotId=$_POST[lotId]";
+						$resultDelete = mysql_query($sqlDelete);
+						
+						if(!$resultDelete)
+							die('Oh No ... Invalid Query: ' . mysql_error());
+					}
 				}
 				if(isset($_POST['update']))
 				{
-					echo "HOLY SHIT<br>";
+					//All sanitation checks passed
+					//Just for test purposes kosher is ture
+					//echo"<pre>".var_dump($_POST)."</pre><br>";
+					$requestingFlyBy=validationCheck($_POST['lotId'],$_POST['studentLot'],$_POST['facultyLot'],$_POST['boundary1'],$_POST['boundary2'],$_POST['boundary3'],$_POST['boundary4'],$_POST['directionTo']);
+					if($requestingFlyBy == null)
+					{	
+						$sqlCheck = "select * from parkinglot where lotId=$_POST[lotId];";
+						$resultCheck = mysql_query($sqlCheck);
+						
+						if (!$resultCheck)
+							die('Invalid query: ' . mysql_error());
+						
+						$updateOrInsertCheck = mysql_num_rows($resultCheck);
+						
+						//Handle New Lot
+						if($updateOrInsertCheck == 0)
+						{
+							echo "Inserting<br>";
+							$sqlInsert = "insert into parkinglot values ('$_POST[lotId]','$_POST[studentLot]','$_POST[facultyLot]','$_POST[boundary1]','$_POST[boundary2]','$_POST[boundary3]','$_POST[boundary4]','$_POST[directionTo]');";
+							$resultInsert = mysql_query($sqlInsert);
+
+							if (!$resultInsert)
+								die('Invalid query: ' . mysql_error());
+						}
+					
+						//Update existing Lot
+						else 
+						{	
+							$sqlUpdate = "update parkinglot set studentLot=$_POST[studentLot], facultyLot=$_POST[facultyLot], Boundary1='$_POST[boundary1]', Boundary2='$_POST[boundary2]', Boundary3='$_POST[boundary3]', Boundary4='$_POST[boundary4]', directionTo='$_POST[directionTo]' where lotId=$_POST[lotId] ";
+							$resultUpdate = mysql_query($sqlUpdate);
+							
+							if (!$resultUpdate)
+								die('Invalid query: ' . mysql_error());
+						}
+					}
+					
+					//There is something wrong so let's not post to database
+					else
+					{
+						$error = $requestingFlyBy;
+						$errorKey = $_POST[lotId];
+					}	
+			
 				}
 				if(isset($_POST['edit']))
 				{
@@ -123,6 +175,14 @@
 					
 					//Set up the very first row to be a row for adding lots
 					echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
+					if(isset($error) && $errorKey == "New")
+					{
+						echo "<tr style='background-color: red'>";
+						$errorKey = NULL;
+							
+					}
+					else
+						echo "<tr>";
 					echo "<td><input type='hidden' name='lotId' value='new'>New</td>";
 					echo "<td><input type='hidden' name='studentLot' value='new'>New</td>";
 					echo "<td><input type='hidden' name='facultyLot' value='new'>New</td>";
@@ -140,7 +200,14 @@
 						//Edit Form
 						echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
 						echo "<input type='hidden' name='password' value='$row[password]'/>";
-						echo "<tr>";
+						if(isset($error) && $errorKey == $row['lotId'])
+						{
+							echo "<tr style='background-color: red'>";
+							$errorKey = NULL;
+							
+						}
+						else
+							echo "<tr>";
 						
 						echo "<td><input type='hidden' name='lotId' value='$row[lotId]'/>$row[lotId]</td>";
 						echo "<td><input type='hidden' name='studentLot' value='$row[studentLot]'/>$row[studentLot]</td>";
@@ -180,8 +247,11 @@
 </div>
 <?php
 	}
-	else 
-		echo "You are not logged in"; 
+	else
+	{
+		header('Refresh: 3; URL= index.php'); 
+		echo "You are not logged in";
+	} 
 ?>
 </body>
 </html>

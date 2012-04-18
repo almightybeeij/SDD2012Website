@@ -82,10 +82,11 @@
 	</div>
 	<?php 
 	}
-	else
+else
 	{
-		echo 'You are not logged in';
-	}
+		header('Refresh: 3; URL= index.php'); 
+		echo "You are not logged in";
+	} 
 	?>
 </body>
 </html>
