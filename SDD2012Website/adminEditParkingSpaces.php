@@ -11,13 +11,13 @@
 <div id="outerContainer">
 	<div id="innerContainer">
 	<?php include "menuAdmin"?>
-		<div id="rightContentPane">
+		<!--  <div id="rightContentPane">
 			Right Content Pane<br>
-			Edit Parking Page<br>			
-		</div>
+			Edit Parking Spaces Page<br>			
+		</div>-->
 		<div id="mainContentPane">
 			Main Content Pane<br>
-			Admin Edit Parking Page<br>			
+			Admin Edit Parking Spaces Page<br>			
 		</div>
 	</div>
 </div>

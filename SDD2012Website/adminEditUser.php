@@ -128,7 +128,7 @@
 					if (!$result)
 						die('Invalid query: ' . mysql_error());
 					
-					echo"<table id='editTable'>";
+					echo"<table id='editTableUsers'>";
 					echo"<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Admin</th><th>Faculty</th><th>Student</th><th>Handicap</th><th>Temp Password</th><th>Action</th></tr>";
 					
 					if($_POST['email'] == 'new' && $_POST['password'] == '')
@@ -221,7 +221,7 @@
 					if (!$result)
 						die('Invalid query: ' . mysql_error());
 
-					echo "<table id='preEditTable'>";
+					echo "<table id='preEditTableUsers'>";
 					echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Admin</th><th>Faculty</th><th>Student</th><th>Handicap</th><th>Temp Password</th><th>Action</th><th>Delete</th></tr>";
 					
 					//Set up the very first row to be a row for adding users					
@@ -247,18 +247,7 @@
 					echo "<td><input type='hidden' name='tempPassFlag' value='new'/>New</td>";
 					echo "<td><input id='edit' type='submit' name='edit' value='Add'/></form></td>";
 					
-					//Set up the delete form
-					echo "<form style='margin:0px' id='deleteForm' name='delete' action='$PHP_SELF?>' method='post'>";
-					echo "<input type='hidden' name='password' value='$row[password]'/>";
-					echo "<input type='hidden' name='firstName' value='new'/>";
-					echo "<input type='hidden' name='lastName' value='new'/>";
-					echo "<input type='hidden' name='email' value='new'/>";
-					echo "<input type='hidden' name='adminFlag' value='new'/>";
-					echo "<input type='hidden' name='facultyFlag' value='new'/>";
-					echo "<input type='hidden' name='studentFlag' value='new'/>";
-					echo "<input type='hidden' name='handicapFlag' value='new'/>";
-					echo "<input type='hidden' name='tempPassFlag' value='new'/>";
-					//echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
+					//This pads the delete cell for the new row
 					echo "<td></td>";
 					echo "</tr>";
 					

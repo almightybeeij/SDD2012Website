@@ -1,6 +1,7 @@
 body
 {
-	background-image: url('../Images/greyMetalBackground.jpg');
+	background-color: 	#A9A9A9;
+	//background-image: url('../Images/greyMetalBackground.jpg');
 	background-position:center;
 	
 }
@@ -44,23 +45,40 @@ body
 	display:inline-block;
 	text-align:left;	
 }
-#preEditTable
+#preEditTableUsers
 {
 	border-style:ridge;
 	border-width:2px;
 	border-color:white;
 	
 }
-#editTable
+#editTableUsers
 {
 	border-style:ridge;
 	border-width:2px;
 	border-color:white;
 	
 }
-tr,td
+#preEditTableLots
 {
 	border-style:ridge;
 	border-width:2px;
-	border-color:white;	
+	border-color:white;
+	font: 14px times;
+	
+}
+#editTableLots
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	font: 14px times;
+	
+}
+tr, td
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+		
 }
