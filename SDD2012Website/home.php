@@ -12,8 +12,8 @@
     google.load("feeds", "1");
 
     function initialize() {
-      //var feed = new google.feeds.Feed("http://calendar.uco.edu//RSSFeeds.aspx?data=O05KNhuuK%2bvmWacXx1zmeZ%2byhPDk%2bYf4qBv6clitqUQ%3d");
-      var feed = new google.feeds.Feed("http://www.bangkokpost.com/rss/data/breakingnews.xml");
+      var feed = new google.feeds.Feed("http://calendar.uco.edu//RSSFeeds.aspx?data=O05KNhuuK%2bvmWacXx1zmeZ%2byhPDk%2bYf4qBv6clitqUQ%3d");
+      //var feed = new google.feeds.Feed("http://www.bangkokpost.com/rss/data/breakingnews.xml");
       feed.load(function(result) {
         if (!result.error) {
           var container = document.getElementById("leftPane");
@@ -82,10 +82,11 @@
 	</div>
 	<?php 
 	}
-	else
+else
 	{
-		echo 'You are not logged in';
-	}
+		header('Refresh: 3; URL= index.php'); 
+		echo "You are not logged in";
+	} 
 	?>
 </body>
 </html>
