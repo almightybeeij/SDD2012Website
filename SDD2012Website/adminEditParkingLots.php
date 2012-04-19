@@ -41,21 +41,22 @@
 					//All sanitation checks passed
 					//Just for test purposes kosher is ture
 					//echo"<pre>".var_dump($_POST)."</pre><br>";
+					
 					$requestingFlyBy=validationCheck($_POST['lotId'],$_POST['studentLot'],$_POST['facultyLot'],$_POST['boundary1'],$_POST['boundary2'],$_POST['boundary3'],$_POST['boundary4'],$_POST['directionTo']);
+					
+					$sqlCheck = "select * from parkinglot where lotId=$_POST[lotId];";
+					$resultCheck = mysql_query($sqlCheck);
+					
+					if (!$resultCheck)
+						die('Invalid query: ' . mysql_error());
+					
+					$updateOrInsertCheck = mysql_num_rows($resultCheck);
+					
 					if($requestingFlyBy == null)
 					{	
-						$sqlCheck = "select * from parkinglot where lotId=$_POST[lotId];";
-						$resultCheck = mysql_query($sqlCheck);
-						
-						if (!$resultCheck)
-							die('Invalid query: ' . mysql_error());
-						
-						$updateOrInsertCheck = mysql_num_rows($resultCheck);
-						
 						//Handle New Lot
 						if($updateOrInsertCheck == 0)
 						{
-							echo "Inserting<br>";
 							$sqlInsert = "insert into parkinglot values ('$_POST[lotId]','$_POST[studentLot]','$_POST[facultyLot]','$_POST[boundary1]','$_POST[boundary2]','$_POST[boundary3]','$_POST[boundary4]','$_POST[directionTo]');";
 							$resultInsert = mysql_query($sqlInsert);
 
@@ -78,7 +79,14 @@
 					else
 					{
 						$error = $requestingFlyBy;
-						$errorKey = $_POST[lotId];
+						if(isset($_POST['newField']))
+						{
+							if($updateOrInsertCheck !=0)
+								$error = $error . "You cannot insert a lot with the id of: $_POST[lotId] because one already exists in the database";
+							$errorKey = $_POST['newField'];
+						}
+						else
+							$errorKey = $_POST[lotId];
 					}	
 			
 				}
@@ -95,7 +103,8 @@
 					if($_POST['lotId'] == 'new')
 					{
 						echo "<form style='margin:0px' id='updateForm' name='updateForm' action='$PHP_SELF?>' method='post'>";
-						echo "<tr>";
+						echo "<input type='hidden' name=newField value='New'/>";
+						echo "<tr>";						
 						echo "<td><input type='text' style='width:100%' name='lotId' value='#'></td>";
 						echo "<td><input type='text' style='width:100%' name='studentLot' value='new'></td>";
 						echo "<td><input type='text' style='width:100%' name='facultyLot' value='new'></td>";
@@ -158,7 +167,8 @@
 							echo "</tr>";
 						}
 					}
-					
+
+					echo "</table>";
 				}
 				
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
@@ -221,7 +231,6 @@
 						
 						//Delete Form
 						echo "<form style='margin:0px' id='deleteForm' name='delete' action='$PHP_SELF?>' method='post'>";
-						echo "<input type='hidden' name='password' value='$row[password]'/>";
 						echo "<input type='hidden' name='lotId' value='$row[lotId]'/>";
 						echo "<input type='hidden' name='studentLot' value='$row[studentLot]'/>";
 						echo "<input type='hidden' name='facultyLot' value='$row[facultyLot]'/>";
@@ -236,6 +245,7 @@
 						
 						
 					}
+					echo "</table>";
 					
 				}
 				Include "Config/closedbServer.php";

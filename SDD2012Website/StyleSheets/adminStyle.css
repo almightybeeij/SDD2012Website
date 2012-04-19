@@ -29,13 +29,25 @@ body
 	border-width:2px;
 	border-right-style:solid;
 }
-#mainContentPane
+#tweet
 {
-	width:720px;
+	width:134px;
 	margin: 10px;
 	padding: 10px;
 	display:inline-block;
-	text-align:left;	
+	text-align:left;
+	border-width:2px;
+	border-right-style:solid;
+	font: 10px Verdanna;
+}
+#mainContentPane
+{
+	width:720px;
+	margin: 0px;
+	padding: 10px;
+	display:inline-block;
+	text-align:left;
+		
 }
 #mainContentPaneAdminUpdate
 {
@@ -75,10 +87,31 @@ body
 	font: 14px times;
 	
 }
+#preEditTableSpaces
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	font-size:10px;
+	
+}
+
+#editTableSpaces
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;	
+	
+}
 tr, td
 {
 	border-style:ridge;
 	border-width:2px;
 	border-color:white;
+	
 		
+}
+.smallFont
+{
+	font: 10px times;
 }

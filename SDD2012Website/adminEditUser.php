@@ -208,6 +208,7 @@
 						
 					}
 						
+					echo "</table>";
 
 				}
 
@@ -290,6 +291,7 @@
 						echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
 						echo "</tr>";
 					}
+					echo "</table>";
 					
 				}
 				Include "Config/closedbServer.php";

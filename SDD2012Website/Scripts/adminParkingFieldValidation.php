@@ -6,10 +6,10 @@ function validationCheck($lotId,$studentLot,$facultyLot,$boundary1,$boundary2,$b
 		$error = $error . "You must not have a lotId of 0<br>";
 	
 	if(($studentLot == 0 && $facultyLot == 0) || ($studentLot == 1 && $facultyLot == 1))
-		$error = $error . "Student lot and faculty lot must NOT be the same";
+		$error = $error . "Student lot and faculty lot must NOT be the same<br>";
 	
-	if(empty($boundary1) || empty($boundary2) || empty($boundary3) || empty($boundary4))
-		$error = $error . "You must not leave a field blank";
+	if(empty($boundary1) || empty($boundary2) || empty($boundary3) || empty($boundary4) || empty($directionTo))
+		$error = $error . "You must not leave a field blank<br>";
 	
 	list($boundary01,$boundary11) = explode(",",$boundary1);
 	list($boundary02,$boundary12) = explode(",",$boundary2);
