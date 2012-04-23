@@ -95,7 +95,6 @@ body
 	font-size:10px;
 	
 }
-
 #editTableSpaces
 {
 	border-style:ridge;
@@ -103,6 +102,23 @@ body
 	border-color:white;	
 	
 }
+#preeditTableCoordinates
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	font: 14px times;
+	
+}
+#editTableCoordinates
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:white;
+	font: 14px times;
+	
+}
+
 tr, td
 {
 	border-style:ridge;

@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/adminStyle.css" />
-<script type="text/javascript" src="Scripts/adminAjaxCall.js"></script>
+<script type="text/javascript" src="Scripts/adminParkingSpacesAjaxCall.js"></script>
 <title>Admin Edit Parking Spaces Page</title>
 </head>
 <body>

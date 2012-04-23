@@ -21,7 +21,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("tableDiv").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("POST","Scripts/adminParkingSpacesAjax.php",true);
+xmlhttp.open("POST","Scripts/adminParkingSpacesAjaxCall.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("lotId="+lotId+"&errorKey="+errorKey+"&error="+error);
 }

@@ -1,7 +1,7 @@
 <div id="menu">
 <link rel="stylesheet" type="text/css" href="StyleSheets/adminMenu.css"/>
 <ul id="navigation">
-<li><a href='adminHome.php'>| Home Page |</a></li><li><a href='adminEditUser.php'>| Edit Users |</a></li><li><a href='adminViewParking.php'>| View Parking Map |</a></li><li><a href='adminEditParkingLots.php'>| Edit Parking Lots|</a><li><a href='adminEditParkingSpaces.php'>| Edit Parking Spaces|</a></li><li><a href='adminViewLotStatus.php'>| View Lot Status |</a></li><li><a href='adminLogout.php'>| Logout |</a></li>
+<li><a href='adminHome.php'>| Home Page |</a></li><li><a href='adminEditUser.php'>| Edit Users |</a></li><li><a href='adminViewParking.php'>| View Parking Map |</a></li><li><a href='adminEditParkingLots.php'>| Edit Parking Lots|</a><li><a href='adminEditParkingSpaces.php'>| Edit Parking Spaces|</a></li><li><a href='adminViewLotStatus.php'>| View Lot |</a></li><li><a href='adminEditCoordinates.php'>| Edit Coordinates |</a></li><li><a href='adminLogout.php'>| Logout |</a></li>
 </ul>
 </div>
 
