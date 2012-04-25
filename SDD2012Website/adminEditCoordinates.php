@@ -32,12 +32,13 @@
 				{
 					if($_POST['ParkingLot_lotId']!="new")
 					{
-						$sqlDelete = "delete from coordinates where spaceId=$_POST[ParkingLot_lotId]";
+						$sqlDelete = "delete from coordinates where ParkingLot_lotId=$_POST[ParkingLot_lotId] and coordinates='$_POST[coordinates]'";
 						$resultDelete = mysql_query($sqlDelete);
 						
 						if(!$resultDelete)
 							die('Oh No ... Invalid Query: ' . mysql_error());
 					}
+					
 				}
 				if(isset($_POST['update']))
 				{
@@ -165,13 +166,12 @@
 					{
 						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
 						echo "<input type='hidden' name=newField value='New'/>";
-						echo "<tr>";
+						echo "<tr id='tableRow$count'>";
 						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$_POST[ParkingLot_lotId]'></td>";
 						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='new'></td>";
 						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='NULL'></td>";
-						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='new'></td>";
+						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
 						echo "<td><input id='update$count' type='button' name='update' onclick='updateCoordinates(updateForm$count.ParkingLot_lotId$count.value, updateForm$count.coordinates$count.value, updateForm$count.drawOrder$count.value, $count)' value='Update'/></form></td>";
-						//echo "<td><input id='update' type='button' name='update' onclick='window.alert('BULL SHIT')' value='Button'/></td>";
 						echo "</tr>";
 					}
 					else
@@ -191,19 +191,18 @@
 						$count += 1;
 					
 						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
-						echo "<tr>";
+						echo "<tr id='tableRow$count'>";
 						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$row[ParkingLot_lotId]'></td>";
 						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='$row[coordinates]'></td>";
 						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='$row[drawOrder]'>$row[drawOrder]</td>";
-						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='Enter DrawOrder'></td>";
+						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
 						echo "<td><input id='update$count' type='button' name='update' onclick='updateCoordinates(updateForm$count.ParkingLot_lotId$count.value, updateForm$count.coordinates$count.value, updateForm$count.drawOrder$count.value, $count)' value='Update'/></form></td>";
-						//echo "<td><input id='update' type='submit' name='update' value='Update'/></form></td>";
 						echo "</tr>";					
 				}
 	
 				echo "</table>";
 				echo "</div>";
-				echo "<div id='test'></div>";
+				echo "<div id='errorDiv'></div>";
 				}
 				
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
@@ -232,6 +231,7 @@
 						echo "</select>";
 						echo "</form>";
 						?>
+						
 						<div id='tableDiv'>
 						<?php
 
@@ -239,7 +239,7 @@
 					
 						?>
 						</div>
-					
+						<div id='errorDiv'></div>
 						<?php 	
 					}
 				}

@@ -18,6 +18,7 @@ $errorKey = $_POST['errorKey'];
 
 
 	//Set up table
+	echo "<div id='tableDiv'>";
 	echo "<table id='preEditTableCoordinates'>";
 	echo "<tr><th>Parking Lot ID</th><th>Coordinates</th><th>Draw Order</th><th>Action</th><th>Delete</th></tr>";
 	
@@ -64,9 +65,11 @@ $errorKey = $_POST['errorKey'];
 		echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
 		echo "</tr>";
 	}
-
 	echo "</table>";
+	echo "</div>";
+	echo "<div id='errorDiv'></div>";
 
+	include "../Config/closedbServer.php";
 
 
 

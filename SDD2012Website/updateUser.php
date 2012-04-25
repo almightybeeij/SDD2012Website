@@ -10,6 +10,8 @@
 	{
 		include "Config/configServer.php";
 		include "Config/connectServer.php";
+		include "Scripts/adminUserFieldValidation.php";
+		include "Scripts/emailValidation.php";
 		?>
 
 	<!--Top Banner-->
@@ -78,23 +80,29 @@
 
 				if(isset ($_POST['update']))
 				{
+					$emailError = validEmail($_POST[emailTextBox]);
+					if($emailError)
+					{	
 
-					$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]' where email='$_SESSION[email]' and password='$_SESSION[password]';";
-					$result = mysql_query($sqlUpdate);
+						$sqlUpdate = "update client set email='$_POST[emailTextBox]', firstName='$_POST[firstNameTextBox]',lastName='$_POST[lastNameTextBox]' where email='$_SESSION[email]' and password='$_SESSION[password]';";
+						$result = mysql_query($sqlUpdate);	
 
-					if (!$result)
-						die('Invalid query: ' . mysql_error());
+						if (!$result)
+							die('Invalid query: ' . mysql_error());
 
-					$sqlSessionUpdate = "update clientsession set Client_email='$_POST[emailTextBox]' where sessionid='$_SESSION[sessionCookie]';";
-					$resultSessionUpdate = mysql_query($sqlSessionUpdate);
+						$sqlSessionUpdate = "update clientsession set Client_email='$_POST[emailTextBox]' where sessionid='$_SESSION[sessionCookie]';";
+						$resultSessionUpdate = mysql_query($sqlSessionUpdate);
 
-					if (!$resultSessionUpdate)
-						die('Invalid query: ' . mysql_error());
+						if (!$resultSessionUpdate)
+							die('Invalid query: ' . mysql_error());
 
 
-					$_SESSION['email'] = $_POST['emailTextBox'];
+						$_SESSION['email'] = $_POST['emailTextBox'];
 
-					echo "<br>Update Succesfull";
+						echo "<br>Update Succesfull";
+					}
+					else 
+						echo "You did not enter a valid email";
 					
 				}
 					
@@ -105,7 +113,7 @@
 				* isset checks to see if the edit value is set in the $_POST array
 				*/
 
-				else if(isset ($_POST['edit']))
+				if(isset ($_POST['edit']))
 				{
 					$sha256Pass = $_SESSION['password'];
 					$sql = "select * from client where email='$_SESSION[email]' and password='$sha256Pass';";
