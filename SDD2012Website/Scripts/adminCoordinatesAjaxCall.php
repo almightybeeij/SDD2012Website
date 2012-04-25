@@ -23,7 +23,6 @@ $errorKey = $_POST['errorKey'];
 	
 	//Set up the very first row to be a row for adding lots
 	echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
-	echo "<input type='hidden' name='lotId' value='$lotId'/>";
 	if(isset($error) && $errorKey == "New")
 	{
 		echo "<tr style='background-color: red'>";
@@ -32,7 +31,7 @@ $errorKey = $_POST['errorKey'];
 	}
 	else
 		echo "<tr>";
-	echo "<td><input type='hidden' name='parkingLot_lotId' value='new'>New</td>";
+	echo "<td><input type='hidden' name='ParkingLot_lotId' value='$lotId'>New</td>";
 	echo "<td><input type='hidden' name='coordinates' value='new'>New</td>";
 	echo "<td><input type='hidden' name='drawOrder' value='new'>New</td>";
 	echo "<td><input id='edit' type='submit' name='edit' value='Add'/></form></td>";

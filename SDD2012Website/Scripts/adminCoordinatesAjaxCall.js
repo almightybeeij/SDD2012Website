@@ -25,3 +25,4 @@ xmlhttp.open("POST","Scripts/adminCoordinatesAjaxCall.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("lotId="+lotId+"&errorKey="+errorKey+"&error="+error);
 }
+
