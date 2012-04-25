@@ -2,6 +2,10 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/style.css" />
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA87azXEcr0D_JcWoAdIWNKtH6ExPC1EMc&sensor=false">
+    </script>
+    <script type="text/javascript" src="Scripts/ParkingMapData.js"></script>
 <title>View Parking Map Page</title>
 </head>
 <body>
