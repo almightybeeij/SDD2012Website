@@ -5,14 +5,13 @@ session_start();
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/signup.css" />
 </head>
-<header> </header>
 <body>
 	<?php
 
-	include 'Config/configServer.php';
-	include 'Config/connectServer.php';
+	require_once 'Config/configServer.php';
+	require_once 'Config/connectServer.php';
 	
-	include 'Scripts/emailValidation.php';
+	require_once 'Scripts/emailValidation.php';
 	
 	$emailError = NULL;
 	
@@ -30,6 +29,8 @@ session_start();
 		 * As of right now the information the user entered is not sanitized using htmlentities or strip
 		 * Will Implement this as time permits
 		*/
+		$emailValidated = validEmail($_POST['emailTextBox']);
+		echo "<div>Here is what was in email validated".$emailValidated."</div>";
 		if($_POST['password'] == $_POST['password2'] && $emailValidated)
 		{
 			$sha256Pass = hash ( 'sha256' , $_POST['password'] );

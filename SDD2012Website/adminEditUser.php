@@ -122,7 +122,7 @@
 				}
 				if(isset ($_POST['edit']))
 				{
-					$sql = "select * from client;";
+					$sql = "select * from client order by email asc;";
 					$result = mysql_query($sql);
 						
 					if (!$result)
@@ -215,7 +215,7 @@
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
 				else 
 				{
-					$sql = "select * from client;";
+					$sql = "select * from client order by email asc;";
 
 					$result = mysql_query($sql);
 
