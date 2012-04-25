@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/adminStyle.css" />
 <script type="text/javascript" src="Scripts/adminCoordinatesAjaxCall.js"></script>
+<script type="text/javascript" src="Scripts/adminUpdateCoordinatesAjaxCall.js"></script>
 <title>Admin Edit Parking Spaces Page</title>
 </head>
 <body>
@@ -31,12 +32,13 @@
 				{
 					if($_POST['ParkingLot_lotId']!="new")
 					{
-						$sqlDelete = "delete from coordinates where spaceId=$_POST[ParkingLot_lotId]";
+						$sqlDelete = "delete from coordinates where ParkingLot_lotId=$_POST[ParkingLot_lotId] and coordinates='$_POST[coordinates]'";
 						$resultDelete = mysql_query($sqlDelete);
 						
 						if(!$resultDelete)
 							die('Oh No ... Invalid Query: ' . mysql_error());
 					}
+					
 				}
 				if(isset($_POST['update']))
 				{
@@ -130,6 +132,7 @@
 				//If we are going to edit table
 				if(isset($_POST['edit']))
 				{
+					$count = 0;
 					$sqlSetup = "select distinct ParkingLot_lotId from coordinates;";
 					$resultSetup = mysql_query($sqlSetup);
 
@@ -155,27 +158,27 @@
 					
 					//
 					//Set up the edit table
-					//
+					//				
 					echo "<div id='tableDiv'>";
 					echo "<table id='editTableCoordinates'>";
 					echo "<tr><th>Parking Lot ID</th><th>Coordinates</th><th>Old Draw Order</th><th>New Draw Order</th><th>Action</th></tr>";
-					if($_POST['ParkingLot_lotId'] == 'new')
+					if($_POST['coordinates'] == 'new')
 					{
-						echo "<form style='margin:0px' class='smallFont' id='updateForm' name='updateForm' action='$PHP_SELF?>' method='post'>";
+						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
 						echo "<input type='hidden' name=newField value='New'/>";
-						echo "<tr>";
-						echo "<td><input type='text' style='width:100%' name='ParkingLot_lotId' value='new'></td>";
-						echo "<td><input type='text' style='width:100%' name='coordinates' value='new'></td>";
-						echo "<td><input type='text' style='width:100%' name='oldDrawOrder' value='NULL'></td>";
-						echo "<td><input type='text' style='width:100%' name='drawOrder' value='new'></td>";
-						echo "<td><input id='update' type='submit' name='update' value='Update'/></form></td>";
+						echo "<tr id='tableRow$count'>";
+						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$_POST[ParkingLot_lotId]'></td>";
+						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='new'></td>";
+						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='NULL'></td>";
+						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
+						echo "<td><input id='update$count' type='button' name='update' onclick='updateCoordinates(updateForm$count.ParkingLot_lotId$count.value, updateForm$count.coordinates$count.value, updateForm$count.drawOrder$count.value, $count)' value='Update'/></form></td>";
 						echo "</tr>";
 					}
 					else
 					{
 						echo "<form style='margin:0px' class='smallFont' id='editForm' name='editForm' action='$PHP_SELF?>' method='post'>";
 						echo "<tr>";
-						echo "<td><input type='hidden' style='width:100%' name='ParkingLot_lotId' value='new'>New</td>";
+						echo "<td><input type='hidden' style='width:100%' name='ParkingLot_lotId' value='$_POST[ParkingLot_lotId]'>New</td>";
 						echo "<td><input type='hidden' style='width:100%' name='coordinates' value='new'>New</td>";
 						echo "<td><input type='hidden' style='width:100%' name='oldDrawOrder' value='NULL'></td>";
 						echo "<td><input type='hidden' style='width:100%' name='drawOrder' value='new'>New</td>";
@@ -185,19 +188,21 @@
 					}
 					while ($row = mysql_fetch_array($resultSelect))
 					{
+						$count += 1;
 					
-						echo "<form style='margin:0px' class='smallFont' id='updateForm' name='updateForm' action='$PHP_SELF?>' method='post'>";
-						echo "<tr>";
-						echo "<td><input type='text' style='width:100%' name='ParkingLot_lotId' value='$row[ParkingLot_lotId]'></td>";
-						echo "<td><input type='text' style='width:100%' name='coordinates' value='$row[coordinates]'></td>";
-						echo "<td><input type='hidden' style='width:100%' name='oldDrawLot' value='$row[drawOrder]'>$row[drawOrder]</td>";
-						echo "<td><input type='text' style='width:100%' name='drawLot' value='Enter DrawOrder'></td>";
-						echo "<td><input id='update' type='submit' name='update' value='Update'/></form></td>";
+						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
+						echo "<tr id='tableRow$count'>";
+						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$row[ParkingLot_lotId]'></td>";
+						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='$row[coordinates]'></td>";
+						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='$row[drawOrder]'>$row[drawOrder]</td>";
+						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
+						echo "<td><input id='update$count' type='button' name='update' onclick='updateCoordinates(updateForm$count.ParkingLot_lotId$count.value, updateForm$count.coordinates$count.value, updateForm$count.drawOrder$count.value, $count)' value='Update'/></form></td>";
 						echo "</tr>";					
 				}
 	
 				echo "</table>";
 				echo "</div>";
+				echo "<div id='errorDiv'></div>";
 				}
 				
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
@@ -226,6 +231,7 @@
 						echo "</select>";
 						echo "</form>";
 						?>
+						
 						<div id='tableDiv'>
 						<?php
 
@@ -233,7 +239,7 @@
 					
 						?>
 						</div>
-					
+						<div id='errorDiv'></div>
 						<?php 	
 					}
 				}

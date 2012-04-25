@@ -10,7 +10,7 @@ $errorKey = $_POST['errorKey'];
 	//We are printing table with edit and delete buttons
 
 
-	$sqlSelect = "select * from parkingspace where ParkingLot_lotId='$lotId';";
+	$sqlSelect = "select * from parkingspace where ParkingLot_lotId='$lotId' order by spaceId desc;";
 	$resultSelect = mysql_query($sqlSelect);
 
 	if(!$resultSelect)
@@ -23,7 +23,6 @@ $errorKey = $_POST['errorKey'];
 	
 	//Set up the very first row to be a row for adding lots
 	echo "<form style='margin:0px' class='smallFont' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
-	echo "<input type='hidden' name='lotId' value='$lotId'/>";
 	if(isset($error) && $errorKey == "New")
 	{
 		echo "<tr style='background-color: red'>";
@@ -33,7 +32,7 @@ $errorKey = $_POST['errorKey'];
 	else
 		echo "<tr>";
 	echo "<td><input type='hidden' name='spaceId' value='new'>New</td>";
-	echo "<td><input type='hidden' name='parkingLotId' value='new'>New</td>";
+	echo "<td><input type='hidden' name='lotId' value='$lotId'>$lotId</td>";
 	echo "<td><input type='hidden' name='clientEmail' value='new'>New</td>";
 	echo "<td><input type='hidden' name='available' value='new'>New</td>";
 	echo "<td><input type='hidden' name='handicap' value='new'>New</td>";
@@ -49,7 +48,6 @@ $errorKey = $_POST['errorKey'];
 	{
 		//Edit Form
 		echo "<form style='margin:0px; class='smallFont' font-size:10px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
-		echo "<input type='hidden' name='lotId' value='$lotId'/>";
 		if(isset($error) && $errorKey == $row['spaceId'])
 		{
 			echo "<tr style='background-color: red'>";
@@ -60,7 +58,7 @@ $errorKey = $_POST['errorKey'];
 		echo "<tr>";
 
 		echo "<td><input type='hidden' name='spaceId' value='$row[spaceId]'/>$row[spaceId]</td>";
-		echo "<td><input type='hidden' name='parkingLotId' value='$row[ParkingLot_lotId]'/>$row[ParkingLot_lotId]</td>";
+		echo "<td><input type='hidden' name='lotId' value='$row[ParkingLot_lotId]'/>$row[ParkingLot_lotId]</td>";
 		echo "<td><input type='hidden' name='clientEmail' value='$row[Client_email]'/>$row[Client_email]</td>";
 		echo "<td><input type='hidden' name='available' value='$row[available]'/>$row[available]</td>";
 		echo "<td><input type='hidden' name='handicap' value='$row[handicap]'/>$row[handicap]</td>";
@@ -73,7 +71,7 @@ $errorKey = $_POST['errorKey'];
 		//Delete Form
 		echo "<form style='margin:0px' class='smallFont' id='deleteForm' name='delete' action='$PHP_SELF?>' method='post'>";
 		echo "<input type='hidden' name='spaceId' value='$row[spaceId]'/>";
-		echo "<input type='hidden' name='parkingLotId' value='$row[ParkingLot_lotId]'/>";
+		echo "<input type='hidden' name='lotId' value='$row[ParkingLot_lotId]'/>";
 		echo "<input type='hidden' name='clientEmail' value='$row[Client_email]'/>";
 		echo "<input type='hidden' name='available' value='$row[available]'/>";
 		echo "<input type='hidden' name='handicap' value='$row[handicap]'/>";

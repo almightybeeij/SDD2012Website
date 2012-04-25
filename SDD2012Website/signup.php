@@ -20,12 +20,12 @@ session_start();
 	 * If all the boxes are filled with user information then we are going to proceed to checking if the passwords match or not
 	 * 
 	 */
-	if (isset($_POST['submit']) && !empty($_POST['firstNameTextBox']) && !empty($_POST['lastNameTextBox']) && !empty($_POST['emailTextBox']) && !empty($_POST['password']) && !empty($_POST['userTypeRadioButton']))
+	if (isset($_POST['submit']) && !empty($_POST['firstNameTextBox']) && !empty($_POST['lastNameTextBox']) && !empty($_POST['emailTextBox']) && !empty($_POST['password']) && !empty($_POST['userTypeRadioButton']) && ($emailValidated = validEmail($_POST['emailTextBox'])))
 	{
 
-		$emailValidated = validEmail($_POST['emailTextBox']);
-		if(!$emailValidated)
-			$emailError = "Email is not a valid Email";
+		//$emailValidated = validEmail($_POST['emailTextBox']);
+		//if(!$emailValidated)
+		//	$emailError = "Email is not a valid Email";
 		/* If the passwords match we can proceed to enter the information into the database
 		 * As of right now the information the user entered is not sanitized using htmlentities or strip
 		 * Will Implement this as time permits
@@ -47,9 +47,13 @@ session_start();
 				$facultyFlag = 1;
 				$studentFlag = 0;
 			}
+			if (isset($_POST['handicap']))
+				$handicap=1;
+			else 
+				$handicap=0;
 			
 			// Prepare the sql insert statement passing along the posted values
-			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]','$adminFlag','$facultyFlag','$studentFlag',0,0);";
+			$sql = "insert into client values ('$_POST[emailTextBox]','$sha256Pass','$_POST[firstNameTextBox]','$_POST[lastNameTextBox]',$adminFlag,$facultyFlag,$studentFlag,$handicap,0);";
 
 			// Get result from the mysql query execution
 			$result = mysql_query($sql);
@@ -127,7 +131,7 @@ session_start();
 						$error = $error."Email Must Not Be Blank<br>";
 						$emailEmpty = true;
 					}
-					elseif (isset($_POST['submit']) && isset($emailError))
+					elseif (isset($_POST['submit']) && !($emailValidated = validEmail($_POST['emailTextBox'])))
 					{
 						echo "<font color='red'>*</font>";
 						$error = $error."Email is not valid<br>";
@@ -157,6 +161,10 @@ session_start();
 				<div> 
 					<input type="radio" name="userTypeRadioButton" value="student"/>Student
 					<input type="radio" name="userTypeRadioButton" value="faculty"/>Faculty
+				</div><br>
+				<label name="handicapType">Handicap Parking :</label>
+				<div>
+					<input type="checkbox" name="handicap" value="Handicap Parking" /> Yes<br />
 				</div>
 				<?php 
 					if (empty($_POST['userTypeRadioButton']) && isset($_POST['submit']))

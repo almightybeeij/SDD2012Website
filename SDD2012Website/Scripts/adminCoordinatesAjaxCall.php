@@ -18,12 +18,12 @@ $errorKey = $_POST['errorKey'];
 
 
 	//Set up table
+	echo "<div id='tableDiv'>";
 	echo "<table id='preEditTableCoordinates'>";
 	echo "<tr><th>Parking Lot ID</th><th>Coordinates</th><th>Draw Order</th><th>Action</th><th>Delete</th></tr>";
 	
 	//Set up the very first row to be a row for adding lots
 	echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
-	echo "<input type='hidden' name='lotId' value='$lotId'/>";
 	if(isset($error) && $errorKey == "New")
 	{
 		echo "<tr style='background-color: red'>";
@@ -32,7 +32,7 @@ $errorKey = $_POST['errorKey'];
 	}
 	else
 		echo "<tr>";
-	echo "<td><input type='hidden' name='parkingLot_lotId' value='new'>New</td>";
+	echo "<td><input type='hidden' name='ParkingLot_lotId' value='$lotId'>New</td>";
 	echo "<td><input type='hidden' name='coordinates' value='new'>New</td>";
 	echo "<td><input type='hidden' name='drawOrder' value='new'>New</td>";
 	echo "<td><input id='edit' type='submit' name='edit' value='Add'/></form></td>";
@@ -65,9 +65,11 @@ $errorKey = $_POST['errorKey'];
 		echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
 		echo "</tr>";
 	}
-
 	echo "</table>";
+	echo "</div>";
+	echo "<div id='errorDiv'></div>";
 
+	include "../Config/closedbServer.php";
 
 
 
