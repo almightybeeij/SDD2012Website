@@ -129,9 +129,9 @@
 					while ($row = mysql_fetch_array($result))
 					{
 						echo "<tr>";
-						echo "<td><input id='firstName' type='text' name='firstNameTextBox' value='$row[firstName]' /></td>";
-						echo "<td><input id='lastName' type='text' name='lastNameTextBox' value='$row[lastName]' /></td>";
-						echo "<td><input id='email' type='text' name='emailTextBox' value='$row[email]' /></td>";
+						echo "<td><input id='firstName' style='width:100%' type='text' name='firstNameTextBox' value='$row[firstName]' /></td>";
+						echo "<td><input id='lastName' style='width:100%' type='text' name='lastNameTextBox' value='$row[lastName]' /></td>";
+						echo "<td><input id='email' style='width:100%' type='text' name='emailTextBox' value='$row[email]' /></td>";
 
 						if ($row['facultyFlag'] == 1)
 							echo "<td>You are a Faculty Member</td>";
