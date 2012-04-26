@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/style.css" />
 <title>About Page</title>
+<script type="text/javascript" src="../flowplayer/example/flowplayer-3.2.6.min.js"></script>
+<script type="text/javascript" src="Scripts/ajax.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 
@@ -61,7 +63,21 @@
 
 			<!-- Main Content Area-->
 			<div id="content">
-				About Page
+				<div style="width:100%;height:300px;" id="player"></div>
+        		<!-- this script block will install Flowplayer inside previous DIV tag -->
+        		<script>
+				flowplayer("player", "http://releases.flowplayer.org/swf/flowplayer-3.2.10.swf", {
+    			clip: {
+			        // these two configuration variables does the trick
+			        url: "Media/MobileDemo.mp4",
+        			autoPlay: false,
+        			autoBuffering: true // <- do not place a comma here
+    					}
+				});
+				</script>
+				
+        		<div id="bs" src="Music/Trine1.flv"></div>
+        		Video about how to use the mobile phone application			
 			</div>
 
 			<!-- Right Side Pane-->
