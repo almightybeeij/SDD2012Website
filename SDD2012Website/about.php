@@ -75,8 +75,6 @@
     					}
 				});
 				</script>
-				
-        		<div id="bs" src="Music/Trine1.flv"></div>
         		Video about how to use the mobile phone application			
 			</div>
 
