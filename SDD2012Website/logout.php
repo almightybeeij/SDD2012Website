@@ -10,18 +10,24 @@
 
     function initialize() {
       var feed = new google.feeds.Feed("http://calendar.uco.edu//RSSFeeds.aspx?data=O05KNhuuK%2bvmWacXx1zmeZ%2byhPDk%2bYf4qBv6clitqUQ%3d");
-      //var feed = new google.feeds.Feed("http://www.bangkokpost.com/rss/data/breakingnews.xml");
       feed.load(function(result) {
         if (!result.error) {
           var container = document.getElementById("leftPane");
-          for (var i = 0; i < result.feed.entries.length; i++) {
+          for (var i = 0; i < result.feed.entries.length; i++) 
+          {
             var entry = result.feed.entries[i];
             var div = document.createElement("div");
-	    var newLine = document.createElement("br");
+	    	var newLine = document.createElement("br");
             div.appendChild(document.createTextNode(entry.title));
             container.appendChild(div);
             container.appendChild(newLine);
           }
+          var image = document.createElement("img");
+          var newLine = document.createElement("br");
+          image.src = "Images/linux-powered.png";
+          container.appendChild(newLine);
+          container.appendChild(newLine);
+          container.appendChild(image);
         }
       });
     }
@@ -41,7 +47,6 @@
 	<!--Top Banner-->
 	<center>
 		<img src="Images/UCOBanner.gif"></img>
-		<img src="Images/linux-powered.png"/>		
 	</center>
 	<?php
 	include "menu"
@@ -64,7 +69,7 @@
 		<div id="containerBlarg">
 			<!-- Left side Pane-->
 			<div id="leftPane">
-				<center>
+				<center>				
 					<span
 						style="text-decoration: underline; font: 15px Verdana; font-weight: 900">RSS
 						FEED</span>

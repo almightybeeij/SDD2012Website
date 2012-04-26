@@ -10,7 +10,6 @@
 
     function initialize() {
       var feed = new google.feeds.Feed("http://calendar.uco.edu//RSSFeeds.aspx?data=O05KNhuuK%2bvmWacXx1zmeZ%2byhPDk%2bYf4qBv6clitqUQ%3d");
-      //var feed = new google.feeds.Feed("http://www.bangkokpost.com/rss/data/breakingnews.xml");
       feed.load(function(result) {
         if (!result.error) {
           var container = document.getElementById("leftPane");
@@ -22,6 +21,12 @@
             container.appendChild(div);
             container.appendChild(newLine);
           }
+          var image = document.createElement("img");
+          var newLine = document.createElement("br");
+          image.src = "Images/linux-powered.png";
+          container.appendChild(newLine);
+          container.appendChild(newLine);
+          container.appendChild(image);
         }
       });
     }
