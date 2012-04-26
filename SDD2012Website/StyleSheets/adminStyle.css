@@ -8,7 +8,7 @@ body
 #outerContainer
 {
 	width:100%;
-	dislplay: block;
+	display: block;
 	text-align:center;
 	margin:0px;	
 }
@@ -21,7 +21,7 @@ body
 }
 #rightContentPane
 {
-	width:134px;
+	width:125px;
 	margin: 10px;
 	padding: 10px;
 	display:inline-block;
@@ -47,6 +47,7 @@ body
 	padding: 10px;
 	display:inline-block;
 	text-align:left;
+	vertical-align: top;
 		
 }
 #mainContentPaneAdminUpdate
@@ -130,4 +131,8 @@ tr, td
 .smallFont
 {
 	font: 10px times;
+}
+.weatherTable tr td
+{
+	border: 0 none;
 }
