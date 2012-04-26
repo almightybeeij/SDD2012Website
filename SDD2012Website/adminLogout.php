@@ -11,9 +11,9 @@
 <div id="outerContainer">
 	<div id="innerContainer">
 	<?php include "menuAdmin"?>
-		<div id="rightContentPane">
+		<!--<div id="rightContentPane">
 			Right Content Pane<br>			
-		</div>
+		</div>-->
 		<div id="mainContentPane">
 		<?php 
 				

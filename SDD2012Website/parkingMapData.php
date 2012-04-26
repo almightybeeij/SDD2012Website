@@ -20,7 +20,7 @@ if($q=="lot"){
 }
 
 if($q=="space"){
-    $sql = "SELECT lotId, corner1, corner2, corner3, corner4, studentLot, facultyLot, available
+    $sql = "SELECT lotId, corner1, corner2, corner3, corner4, studentLot, facultyLot, available, spaceId, Client_email
             FROM parkingspace,parkinglot WHERE ParkingLot_lotId = lotId;";
 
     $result = mysql_query($sql);

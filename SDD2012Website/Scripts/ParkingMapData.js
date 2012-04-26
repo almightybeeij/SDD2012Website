@@ -1,6 +1,5 @@
-var url = "http://192.168.1.77:8081/parkingMapData.php?q=lot";
-var spaceurl = "http://192.168.1.77:8081/parkingMapData.php?q=space";
-
+var lotURL = "http://192.168.1.77:8081/parkingMapData.php?q=lot";
+var spaceURL = "http://192.168.1.77:8081/parkingMapData.php?q=space";
 
 
 var UCOMapStyles = [{ elementType:"labels",stylers:[{ visibility:"off" }]},

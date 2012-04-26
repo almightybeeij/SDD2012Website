@@ -6,6 +6,7 @@
 <script type="text/javascript" src="Scripts/ParkingMapData.js"></script>
 <title>View Parking Map Page</title>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="Scripts/ViewParking.js"></script>
 <script type="text/javascript">
 
     google.load("feeds", "1");
@@ -36,7 +37,7 @@
 
 </script>
 </head>
-<body>
+<body onload='initializeMap()'>
 	<?php
 	if (isset($_SESSION['sessionCookie']) && $_SESSION['userType'] == "regular")
 	{

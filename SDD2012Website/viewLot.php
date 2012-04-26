@@ -3,7 +3,9 @@
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/style.css" />
 <title>View Lot Status Page</title>
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA87azXEcr0D_JcWoAdIWNKtH6ExPC1EMc&sensor=false"> </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="Scripts/ParkingMap.js"></script>
 <script type="text/javascript">
 
     google.load("feeds", "1");
@@ -34,7 +36,7 @@
 
 </script>
 </head>
-<body>
+<body onload="initializeMap()">
 	<?php
 	if (isset($_SESSION['sessionCookie']) && $_SESSION['userType'] == "regular")
 	{

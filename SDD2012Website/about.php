@@ -3,8 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="StyleSheets/style.css" />
 <title>About Page</title>
-<script type="text/javascript" src="../flowplayer/example/flowplayer-3.2.6.min.js"></script>
-<script type="text/javascript" src="Scripts/ajax.js"></script>
+<script type="text/javascript" src="flowplayer/example/flowplayer-3.2.6.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 
