@@ -118,7 +118,7 @@
 				
 				echo "<table>\n";
 				echo "<tr tyle='background-color: #003366'><th colspan='7'>$monthName</th></tr>";
-				echo "<tr><th width='14%'>Sunday</th><th width='14%'>Monday</th><th width='14%'>Teusday</th><th width='14%'>Wednesday</th><th width='14%'>Thursday</th><th width='14%'>Friday</th><th width='14%'>Saturday</th></tr>";
+				echo "<tr><th width='14%'>Sunday</th><th width='14%'>Monday</th><th width='14%'>Tuesday</th><th width='14%'>Wednesday</th><th width='14%'>Thursday</th><th width='14%'>Friday</th><th width='14%'>Saturday</th></tr>";
 
 				while ($Day = $Month->fetch()) 
 				{

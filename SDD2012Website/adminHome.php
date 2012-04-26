@@ -90,9 +90,9 @@
 								
 				}
 				
-				echo "<table>\n";
+				echo "<table style='text-align:center'>";
 				echo "<tr style='background-color: #003366; color:white' ><th colspan='7'>$monthName</th></tr>";
-				echo "<tr style='background-color: #003366; color:white'' ><th width='14%'>Sunday</th><th width='14%'>Monday</th><th width='14%'>Teusday</th><th width='14%'>Wednesday</th><th width='14%'>Thursday</th><th width='14%'>Friday</th><th width='14%'>Saturday</th></tr>";
+				echo "<tr style='background-color: #003366; color:white'' ><th width='14%'>Sunday</th><th width='14%'>Monday</th><th width='14%'>Tuesday</th><th width='14%'>Wednesday</th><th width='14%'>Thursday</th><th width='14%'>Friday</th><th width='14%'>Saturday</th></tr>";
 
 				while ($Day = $Month->fetch()) 
 				{
@@ -120,6 +120,7 @@
 				}
 
 				echo "</table>\n";
+				
 				
 				//Weather
 				
@@ -164,15 +165,16 @@
 						$currentHumidity = $new->humidity['data'];
 						$icon = $new->icon['data'];
 						$currentWind = $new->wind_condition['data'];
-						
-						echo "<br><table class='weatherTable'>";
+						echo "<div style='display:inline-block; margin:5px'>";
+						echo "<br><table id='weather'class='weatherTable'>";
 						echo "<tr><th colspan=2>Current Weather for $city</th></tr>";
 						echo "<tr><td border='0' rowspan=5 '><img src='http://www.google.com/$icon'></img></td></tr>";
 						echo "<tr><td border='0'>$currentCondition</td></tr>";
 						echo "<tr><td border='0'>$currentTemp &degF</td></tr>";
 						echo "<tr><td border='0'>$currentHumidity</td></tr>";
 						echo "<tr><td border='0'>$currentWind</td></tr>";
-						echo "</table><br>";						
+						echo "</table><br>";
+						echo "</div>";						
 						
 					}
 					
@@ -183,13 +185,14 @@
 						$high = $new->high['data'];						
 						$icon = $new->icon['data'];						
 						$condition = $new->condition['data'];
-
-						echo "<table class='weatherTable'>";
+						echo "<div style='display:inline-block; margin:5px'>";
+						echo "<table id='weather' class='weatherTable'>";
 						echo "<tr><th colspan=2>Weather for $city on $day</th></tr>";
 						echo "<tr><td rowspan=3 '><img src='http://www.google.com/$icon'></img></td></tr>";
 						echo "<tr><td>$condition</td></tr>";
 						echo "<tr><td>$low &degF | $high &degF</td></tr>";
 						echo "</table><br>";
+						echo "</div>";
 						
 						
 						
@@ -200,8 +203,8 @@
 				}
 				
 				
-				?>
-			
+				
+				?>			
 		
 	</div>
 </div>

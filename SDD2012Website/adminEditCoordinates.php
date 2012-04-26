@@ -39,7 +39,71 @@
 							die('Oh No ... Invalid Query: ' . mysql_error());
 					}
 					
+					
+					$sqlSetup = "select distinct ParkingLot_lotId from coordinates;";
+					$resultSetup = mysql_query($sqlSetup);
+						
+					if(!$resultSetup)
+						die("Invalid Query from parkinglot" . mysql_error());
+					
+					echo "<form>";
+						
+					if(!empty($error))
+						echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,\"$errorKey\",1)'>";
+					
+						else
+							echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,0,0)'>";
+						echo "<option value=''>Select A Parking Lot ID:</option>";
+						while($row = mysql_fetch_array($resultSetup))
+						{
+							echo "<option value='$row[ParkingLot_lotId]'>$row[ParkingLot_lotId]</option>";
+						}
+						echo "</select>";
+						echo "</form>";
+						
+						$sqlSelect = "select * from coordinates where ParkingLot_lotId='$_POST[ParkingLot_lotId]' order by drawOrder asc;";
+						$resultSelect = mysql_query($sqlSelect);
+							
+						if(!$resultSelect)
+							die("Invalid select query:" . mysql_error());
+					//Set up table
+					echo "<div id='tableDiv'>";
+					echo "<table id='preEditTableCoordinates'>";
+					echo "<tr><th>Parking Lot ID</th><th>Coordinates</th><th>Draw Order</th><th>Action</th><th>Delete</th></tr>";
+					
+					//Set up the very first row to be a row for adding lots
+					echo "<form style='margin:0px' id='editForm' name='edit' action='$PHP_SELF?>' method='post'>";
+					echo "<tr>";
+					echo "<td><input type='hidden' name='ParkingLot_lotId' value='$lotId'>New</td>";
+					echo "<td><input type='hidden' name='coordinates' value='new'>New</td>";
+					echo "<td><input type='hidden' name='drawOrder' value='new'>New</td>";
+					echo "<td><input id='edit' type='submit' name='edit' value='Add'/></form></td>";
+					echo "<td></td>";
+					echo "</tr>";
+					
+					while ($row = mysql_fetch_array($resultSelect))
+					{
+						//Edit Form
+						echo "<tr>";
+						echo "<td><input type='hidden' name='ParkingLot_lotId' value='$row[ParkingLot_lotId]'/>$row[ParkingLot_lotId]</td>";
+						echo "<td><input type='hidden' name='coordinates' value='$row[coordinates]'/>$row[coordinates]</td>";
+						echo "<td><input type='hidden' name='drawOrder' value='$row[drawOrder]'/>$row[drawOrder]</td>";
+						echo "<td><input id='edit' type='submit' name='edit' value='Edit'/></form></td>";
+					
+						//Delete Form
+						echo "<form style='margin:0px' id='deleteForm' name='delete' action='$PHP_SELF?>' method='post'>";
+						echo "<input type='hidden' name='ParkingLot_lotId' value='$row[ParkingLot_lotId]'/>";
+						echo "<input type='hidden' name='coordinates' value='$row[coordinates]'/>";
+						echo "<input type='hidden' name='drawOrder' value='$row[drawOrder]'/>";
+						echo "<td><input id='delete' type='submit' name='delete' value='Delete'/></form></td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+					echo "</div>";
+					echo "<div id='errorDiv'></div>";
+					
 				}
+				
 				if(isset($_POST['update']))
 				{
 					//All sanitation checks passed
@@ -167,7 +231,7 @@
 						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
 						echo "<input type='hidden' name=newField value='New'/>";
 						echo "<tr id='tableRow$count'>";
-						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$_POST[ParkingLot_lotId]'></td>";
+						echo "<td><input type='hidden' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$_POST[ParkingLot_lotId]'>$_POST[ParkingLot_lotId]</td>";
 						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='new'></td>";
 						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='NULL'></td>";
 						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
@@ -192,7 +256,7 @@
 					
 						echo "<form style='margin:0px' class='smallFont' id='updateForm$count' name='updateForm$count' action='$PHP_SELF?>' method='post'>";
 						echo "<tr id='tableRow$count'>";
-						echo "<td><input type='text' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$row[ParkingLot_lotId]'></td>";
+						echo "<td><input type='hidden' style='width:100%' id='ParkingLot_lotId$count' name='ParkingLot_lotId$count' value='$row[ParkingLot_lotId]'>$row[ParkingLot_lotId]</td>";
 						echo "<td><input type='text' style='width:100%' id='coordinates$count' name='coordinates$count' value='$row[coordinates]'></td>";
 						echo "<td><input type='hidden' style='width:100%' id='oldDrawOrder$count' name='oldDrawOrder$count' value='$row[drawOrder]'>$row[drawOrder]</td>";
 						echo "<td><input type='text' style='width:100%' id='drawOrder$count' name='drawOrder$count' value='#'></td>";
@@ -208,7 +272,7 @@
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
 				else 
 				{
-					if(!isset($_POST['update']))
+					if(!isset($_POST['update']) && !isset($_POST['edit']) && !isset($_POST['delete']))
 					{
 						$sqlSetup = "select distinct ParkingLot_lotId from coordinates;";
 						$resultSetup = mysql_query($sqlSetup);

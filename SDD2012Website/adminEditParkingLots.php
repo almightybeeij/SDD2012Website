@@ -29,7 +29,7 @@
 				{
 					if($_POST['lotId']!="new")
 					{
-						$sqlDelete = "delete from parkinglot where lotId=$_POST[lotId]";
+						$sqlDelete = "delete from parkinglot where lotId=$_POST[lotId];";
 						$resultDelete = mysql_query($sqlDelete);
 						
 						if(!$resultDelete)
@@ -43,12 +43,11 @@
 					//echo"<pre>".var_dump($_POST)."</pre><br>";
 					
 					$requestingFlyBy=validationCheck($_POST['lotId'],$_POST['studentLot'],$_POST['facultyLot'],$_POST['boundary1'],$_POST['boundary2'],$_POST['boundary3'],$_POST['boundary4'],$_POST['directionTo']);
-					
-					$sqlCheck = "select * from parkinglot where lotId=$_POST[lotId];";
+					$sqlCheck = "select * from parkinglot where lotId='$_POST[lotId]';";
 					$resultCheck = mysql_query($sqlCheck);
 					
 					if (!$resultCheck)
-						die('Invalid query: ' . mysql_error());
+						die('Invalid sqlCheck query: ' . mysql_error());
 					
 					$updateOrInsertCheck = mysql_num_rows($resultCheck);
 					
@@ -61,13 +60,13 @@
 							$resultInsert = mysql_query($sqlInsert);
 
 							if (!$resultInsert)
-								die('Invalid query: ' . mysql_error());
+								die('Invalid sqlInsert query: ' . mysql_error());
 						}
 					
 						//Update existing Lot
 						else 
 						{	
-							$sqlUpdate = "update parkinglot set studentLot=$_POST[studentLot], facultyLot=$_POST[facultyLot], Boundary1='$_POST[boundary1]', Boundary2='$_POST[boundary2]', Boundary3='$_POST[boundary3]', Boundary4='$_POST[boundary4]', directionTo='$_POST[directionTo]' where lotId=$_POST[lotId] ";
+							$sqlUpdate = "update parkinglot set studentLot=$_POST[studentLot], facultyLot=$_POST[facultyLot], Boundary1='$_POST[boundary1]', Boundary2='$_POST[boundary2]', Boundary3='$_POST[boundary3]', Boundary4='$_POST[boundary4]', directionTo='$_POST[directionTo]' where lotId=$_POST[lotId];";
 							$resultUpdate = mysql_query($sqlUpdate);
 							
 							if (!$resultUpdate)

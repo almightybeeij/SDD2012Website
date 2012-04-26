@@ -45,7 +45,7 @@
 					if(!$resultSetup)
 						die("Invalid Query from parkinglot" . mysql_error());
 						
-					echo "<form>";
+					echo "<form id='delete'>";
 					
 					if(!empty($error))
 						echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,\"$errorKey\",1)'>";
@@ -69,6 +69,7 @@
 					
 					
 					//Set up table
+					echo "<div id='tableDiv'>";
 					echo "<table id='preEditTableSpaces' style='font-size:10px'>";
 					echo "<tr><th>Space ID</th><th>Lot #</th><th>Client Email</th><th>Open</th><th>Handicap</th><th>Corner 1</th><th>Corner 2</th><th>Corner 3</th><th>Corner 4</th><th>Action</th><th>Delete</th></tr>";
 					
@@ -121,6 +122,7 @@
 					}
 					
 					echo "</table>";
+					echo "</div>";
 					
 					
 				}
@@ -171,7 +173,7 @@
 					if(!$resultSetup)
 						die("Invalid Query from parkinglot" . mysql_error());
 					
-					echo "<form>";
+					echo "<form id='update'>";
 						
 					if(!empty($error))
 						echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,\"$errorKey\",1)'>";
@@ -282,7 +284,7 @@
 					if(!$resultSelect)
 						die("Invalid select query:" . mysql_error());
 					
-					echo "<form>";
+					echo "<form id='edit'>";
 					echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,0,0)'>";
 					echo "<option value=''>Select A Parking Lot ID:</option>";
 					while($row = mysql_fetch_array($resultSetup))
@@ -375,7 +377,7 @@
 				// This gets executed on the very first page load and as a fall through effect for updating and editing
 				else 
 				{
-					if(!isset($_POST['update']) || !isset($_POST['delete']))
+					if(!isset($_POST['update']) && !isset($_POST['delete']) && !isset($_POST['edit']))
 					{
 						$sqlSetup = "select * from parkinglot order by lotId asc;";
 						$resultSetup = mysql_query($sqlSetup);
@@ -383,7 +385,7 @@
 						if(!$resultSetup)
 							die("Invalid Query from parkinglot" . mysql_error());
 						
-						echo "<form>";
+						echo "<form id='preEdit'>";
 					
 						if(!empty($error))
 							echo "<select name='parkingLotId' onchange='showParkingSpaces(this.value,\"$errorKey\",1)'>";

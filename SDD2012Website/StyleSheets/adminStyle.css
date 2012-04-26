@@ -29,7 +29,11 @@ body
 	border-width:2px;
 	border-right-style:solid;
 }
-#tweet
+#tweet ul li
+{	
+	font: 8px Verdanna;
+}
+.tweet
 {
 	width:134px;
 	margin: 10px;
@@ -38,7 +42,7 @@ body
 	text-align:left;
 	border-width:2px;
 	border-right-style:solid;
-	font: 10px Verdanna;
+	font: 8px Verdanna;
 }
 #mainContentPane
 {
@@ -132,7 +136,19 @@ tr, td
 {
 	font: 10px times;
 }
+#weather
+{
+	border:0px;
+}
+#weather th
+{
+	font: 8px times;
+	color: black;
+	border:0px;
+	
+}
 .weatherTable tr td
 {
 	border: 0 none;
+	font: 8px times;
 }
