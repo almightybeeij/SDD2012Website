@@ -68,7 +68,7 @@
 				flowplayer("player", "http://releases.flowplayer.org/swf/flowplayer-3.2.10.swf", {
     			clip: {
 			        // these two configuration variables does the trick
-			        url: "Media/MobileDemo.mp4",
+			        url: "Media/Demo_video_bad_ending.mp4",
         			autoPlay: false,
         			autoBuffering: true // <- do not place a comma here
     					}
